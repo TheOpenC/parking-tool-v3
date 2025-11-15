@@ -1,7 +1,4 @@
 
-
-
-
 let today = new Date();
 let month = String(today.getMonth()+1).padStart(2, '0'); //MM
 let day = String(today.getDate()).padStart(2, '0'); //DD
@@ -25,3 +22,5 @@ fetch(parkingUrl, {
     .catch(err => {
         console.log(`error ${err}`)
     })
+
+    
