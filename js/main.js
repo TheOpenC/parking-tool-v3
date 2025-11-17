@@ -2,37 +2,6 @@ import {CronJob} from 'cron';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// const runAPI = new CronJob('*/10 * * * * *', async () => {
-// 	console.log('Cron Running') // true during callback execution
-// 	try {
-//         await dayOrNight();
-//     } catch (err) {
-//         console.error('[Cron] dayOrNight failed:', err.message);
-//         if (err.cause) {
-//             console.error('cause: ', err.cause);
-//         }
-//     }
-// });
-
-// runAPI.start()
-
-// fetch(parkingUrl, {
-//     method: 'GET',
-//     // REQUEST HEADERS
-//     headers: {
-//         'Cache-Control': 'no-cache',
-//         'Ocp-Apim-Subscription-Key': process.env.API_KEY}
-//     })
-
-
-//     .then(data => {
-//         console.log(data)
-//         console.log(data.text())
-//     })
-//     .catch(err => {
-//         console.log(`error ${err}`)
-//     })
-
 let today = new Date();
 let month = String(today.getMonth()+1).padStart(2, '0'); //MM
 let day = String(today.getDate()).padStart(2, '0'); //DD
@@ -51,67 +20,94 @@ const parkingRequest = new Request(parkingUrl, {
 //     // REQUEST HEADERS
         headers: {
             'Cache-Control': 'no-cache',
-            'Ocp-Apim-Subscription-Key': process.env.API_KEY
+            'Ocp-Apim-Subscription-Key': process.env.OCP_KEY
         }
-        }) 
+        })
+
+const weatherRequest = new Request(weatherUrl, {
+        method: 'GET',
+        headers: {
+            authentication: WEATHER_USER_AGENT
+        }
+})
 
 
 async function getParking() {
-    try{
+    try {   
         const parkingResponse = await fetch(parkingRequest)
+            console.log('parking request confirmed')
         const parkingData = await parkingResponse.json()
-        if (parkingResponse.status == 200) {
+            console.log('parking response sent')
             return {
-                parkingData
+                details: parkingData.days[0].items[0].details,
+                status: parkingData.days[0].items[0].status,
+                type: parkingData.days[0].items[0].type
             }
+
+        } catch(error) {
+            console.log('Fetch Error', error)
+        };
+}
+
+
+async function getWeather() {
+    try {
+        const   weatherData = await fetch(weatherRequest),
+                result = await weatherData.json(),
+                timeData = await fetch(clockUrl),
+                rawTime = await timeData.json(),
+                time = rawTime,
+                weather = result.properties.periods[0].detailedForecast,
+                weatherFormatted = weather.charAt(0).toLowerCase() + weather.slice(1)
+
             
-        } else {
-            console.log('Server Error', parkingResponse.error)
-        }
-    } catch(error) {
+            return {
+            current: result.properties.periods[0].name,
+            forecast: weatherFormatted,
+            time: time.datetime
+            }
+
+    } catch(error){
         console.log('Fetch Error', error)
     }
 }
 
-// async function getWeather() {
-//     try {
-//         const weatherData = await fetch(weatherUrl)
-//         const result = await weatherData.json()
-//         const timeData = await fetch(clockUrl)
-//         const time = await timeData.json()
-        
-        
-            
-//             return {
-//             current: result.properties.periods[0].name,
-//             forecast: result.properties.periods[0].shortForecast,
-//             time: time.datetime
-//             }
+async function combineAPIData() {
+    const   {current, forecast, time} = await getWeather(),
+            {details, status, type}   = await getParking();
 
-    
+        return `
+        ${time} in NYC
+        The ${type} Report
 
-//     } catch(error){
-//         console.log('Fetch Error', error)
-//     }
-// }
+        Parking: ${details}
+        Status: ${status}
+        ${current}, ${forecast} 
+        `
+}
 
-// async function dayOrNight() {
-//     const {current, forecast, time} = await getWeather();
-//     const {parking} = await getParking();
-//     console.log(`
-//     ${current}, ${time} in NYC
-//     Forecast: ${forecast}
-//     Parking: ${parking}
-//     `)
-// }
-
-
-
-    async function parkingData() {
-           
-        const response = await fetch(parkingRequest)
-        const data = await response.json()
-        return data
+const runAPI = new CronJob('*/15 * * * * *', async () => {
+	console.log('Cron initiated...') // true during callback execution
+	try {
+        const fullData = await combineAPIData();
+        console.log(fullData)
+    } catch (err) {
+        console.error('[Cron], combineAPIData has failed:', err.message);
+        if (err.cause) {
+            console.error('cause: ', err.cause);
+        }
     }
+});
 
-parkingData()
+
+runAPI.start()
+
+
+//     async function parkingData() {
+           
+//         const response = await fetch(parkingRequest)
+//         const data = await response.json()
+//         return data
+//     }
+
+// parkingData()
