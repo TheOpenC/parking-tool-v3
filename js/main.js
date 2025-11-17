@@ -27,7 +27,7 @@ const parkingRequest = new Request(parkingUrl, {
 const weatherRequest = new Request(weatherUrl, {
         method: 'GET',
         headers: {
-            authentication: WEATHER_USER_AGENT
+            'User-Agent': WEATHER_USER_AGENT
         }
 })
 
@@ -41,7 +41,8 @@ async function getParking() {
             return {
                 details: parkingData.days[0].items[0].details,
                 status: parkingData.days[0].items[0].status,
-                type: parkingData.days[0].items[0].type
+                type: parkingData.days[0].items[0].type,
+                raw: parkingData
             }
 
         } catch(error) {
@@ -59,7 +60,7 @@ async function getWeather() {
                 time = rawTime,
                 weather = result.properties.periods[0].detailedForecast,
                 weatherFormatted = weather.charAt(0).toLowerCase() + weather.slice(1)
-
+                console.log('Weather Data recieved...')
             
             return {
             current: result.properties.periods[0].name,
@@ -72,10 +73,22 @@ async function getWeather() {
     }
 }
 
-async function combineAPIData() {
-    const   {current, forecast, time} = await getWeather(),
-            {details, status, type}   = await getParking();
+async function formatTwoWeeksParking(){
+        const   {raw} = await getParking(),
+                twoWeeks = {}
 
+                for (let i = 0; i < 14; i++) {
+                    // this needs to be in the format of {day[i]: [details, status, type]} or {day[i]: {details: ,status: ,type: }}
+                   ++Object.assign(twoWeeks, raw.days[i].items[0] )
+                }
+    }
+
+
+async function combineAPIData() {
+    const   {current, forecast, time} = await getWeather(),     // Get the weather data for 1 day
+            {details, status, type}   = await getParking();     // Get the parking data for 1 day
+                                                                // emoticons for weather
+                                                                // emoticons for parking
         return `
         ${time} in NYC
         The ${type} Report
