@@ -6,14 +6,12 @@ let today = new Date();
 let month = String(today.getMonth()+1).padStart(2, '0'); //MM
 let day = String(today.getDate()).padStart(2, '0'); //DD
 let year = String(today.getFullYear()); //YYYY
-
-
-const weatherUrl = 'https://api.weather.gov/gridpoints/OKX/35,34/forecast'
-const clockUrl = 'https://worldtimeapi.org/api/timezone/America/New_York'
-
 const WEATHER_USER_AGENT = 'parking-tool-v3 (contact: ddudak@gmail.com)';
 
-let parkingUrl = `https://api.nyc.gov/public/api/GetCalendar?fromdate=${month}%2F${day}%2F${year}&todate=${+month + 1}%2F${day}%2F${year}`  
+
+let parkingUrl = `https://api.nyc.gov/public/api/GetCalendar?fromdate=${month}%2F${day}%2F${year}&todate=${+month + 1}%2F${day}%2F${year}` 
+const weatherUrl = 'https://api.weather.gov/gridpoints/OKX/35,34/forecast'
+const timeUrl = 'https://worldtimeapi.org/api/timezone/America/New_York' 
 
 const parkingRequest = new Request(parkingUrl, {
          method: 'GET',
@@ -33,73 +31,125 @@ const weatherRequest = new Request(weatherUrl, {
 
 
 async function getParking() {
-    try {   
-        const parkingResponse = await fetch(parkingRequest)
-            console.log('parking request confirmed')
-        const parkingData = await parkingResponse.json()
-            console.log('parking response sent')
-            return {
-                details: parkingData.days[0].items[0].details,
-                status: parkingData.days[0].items[0].status,
-                type: parkingData.days[0].items[0].type,
-                raw: parkingData
-            }
+        const   parkingResponse = await fetch(parkingRequest),
+                parkingJSON = await parkingResponse.json();
+        return parkingJSON;
 
-        } catch(error) {
-            console.log('Fetch Error', error)
-        };
+        // return parkingResponse
+        //     console.log('parking request confirmed')
+        // const parkingData = await parkingResponse.json()
+        //     console.log('parking response sent')
+        //     return {
+        //         details: parkingData.days[0].items[0].details,
+        //         status: parkingData.days[0].items[0].status,
+        //         type: parkingData.days[0].items[0].type,
+        //         raw: parkingData
+        //     }
+        
 }
 
 
 async function getWeather() {
-    try {
-        const   weatherData = await fetch(weatherRequest),
-                result = await weatherData.json(),
-                timeData = await fetch(clockUrl),
-                rawTime = await timeData.json(),
-                time = rawTime,
-                weather = result.properties.periods[0].detailedForecast,
-                weatherFormatted = weather.charAt(0).toLowerCase() + weather.slice(1)
-                console.log('Weather Data recieved...')
-            
-            return {
-            current: result.properties.periods[0].name,
-            forecast: weatherFormatted,
-            time: time.datetime
-            }
+    const   weatherResponse = await fetch(weatherRequest),
+            timeResponse = await fetch(timeUrl),
+            weatherJSON = await weatherResponse.json(),
+            timeJSON = await timeResponse.json()
 
-    } catch(error){
-        console.log('Fetch Error', error)
-    }
+            return {weatherJSON, timeJSON};
+
+
+                // result = await weatherData.json(),
+                // timeData = await fetch(clockUrl),
+                // rawTime = await timeData.json(),
+                // time = rawTime,
+                // weather = result.properties.periods[0].detailedForecast,
+                // weatherFormatted = weather.charAt(0).toLowerCase() + weather.slice(1)
+            //     console.log('Weather Data recieved...')
+            
+            // return {weatherResponse, timeResponse}
+            // current: result.properties.periods[0].name,
+            // forecast: weatherFormatted,
+            // time: time.datetime
+            
+  
 }
 
-async function formatTwoWeeksParking(){
-        const   {raw} = await getParking(),
-                twoWeeks = {}
+async function fetchAllData() {
+    const   parkingJSON = await getParking(),
+            {weatherJSON, timeJSON} = await getWeather();
 
-                for (let i = 0; i < 14; i++) {
-                    // this needs to be in the format of {day[i]: [details, status, type]} or {day[i]: {details: ,status: ,type: }}
-                   ++Object.assign(twoWeeks, raw.days[i].items[0] )
-                }
+            console.log('parking received, weather received. Returning results to formatters')
+            return {parkingJSON, weatherJSON, timeJSON };
+}
+
+function formatParking(parkingJSON) {                    
+
+                // twoWeeks = {}
+                // console.log(`Parking: ${parking}`)
+
+                // for (let i = 0; i < 14; i++) {
+                //     // this needs to be in the format of {day[i]: [details, status, type]} or {day[i]: {details: ,status: ,type: }}
+                //    ++Object.assign(twoWeeks, raw.days[i].items[0] )
+                // }
+        const   findSuspension = parkingJSON.days.find(day => day.items[0].status === 'SUSPENDED' ),
+                nextSuspension = `${findSuspension.items[0].exceptionName} (${findSuspension.today_id})`
+
+                return {
+                details: parkingJSON.days[0].items[0].details,
+                status: parkingJSON.days[0].items[0].status,
+                tomorrow: parkingJSON.days[1].items[0].status,
+                type: parkingJSON.days[0].items[0].type,
+                raw: parkingJSON,
+                nextSuspension: nextSuspension
+            }
     }
+
+function formatWeather(weatherJSON, timeJSON) {
+    const   weather = weatherJSON,
+            forecastUnformatted = weather.properties.periods[0].detailedForecast,
+            forecast = forecastUnformatted.charAt(0).toLowerCase() + forecastUnformatted.slice(1);
+            
+    
+    return {
+            current: weather.properties.periods[0].name,
+            forecast: forecast,
+            time: timeJSON.datetime
+            }
+}
+
+
+
 
 
 async function combineAPIData() {
-    const   {current, forecast, time} = await getWeather(),     // Get the weather data for 1 day
-            {details, status, type}   = await getParking();     // Get the parking data for 1 day
-                                                                // emoticons for weather
-                                                                // emoticons for parking
+    // Get all raw JSON
+    const   {parkingJSON, weatherJSON, timeJSON} = await fetchAllData(),
+
+    // JSON >> objects
+            parking = formatParking(parkingJSON), 
+            weather = formatWeather(weatherJSON, timeJSON),
+
+            //divide fields from objects
+            {details, status, type, tomorrow, nextSuspension, raw} = parking,
+            {current, forecast, time} = weather
+            let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+
+
         return `
-        ${time} in NYC
+        ${months[month - 1]} ${day}, ${year} in NYC
         The ${type} Report
 
-        Parking: ${details}
+        Parking: ${details} 
         Status: ${status}
-        ${current}, ${forecast} 
+        
+        ${current}, ${forecast}
+
+        Tommorrow, parking rules are: ${tomorrow}
+        Next Suspension: ${nextSuspension} 
         `
 }
 
-const runAPI = new CronJob('*/15 * * * * *', async () => {
+const job = new CronJob('*/15 * * * * *', async () => {
 	console.log('Cron initiated...') // true during callback execution
 	try {
         const fullData = await combineAPIData();
@@ -113,7 +163,7 @@ const runAPI = new CronJob('*/15 * * * * *', async () => {
 });
 
 
-runAPI.start()
+job.start()
 
 
 //     async function parkingData() {
