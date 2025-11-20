@@ -6,11 +6,16 @@ let today = new Date();
 let month = String(today.getMonth()+1).padStart(2, '0'); //MM
 let day = String(today.getDate()).padStart(2, '0'); //DD
 let year = String(today.getFullYear()); //YYYY
+
+let endMonth = String(today.getMonth()+3).padStart(2, '0');
+    // if (endMonth == 10)
+let endDay = String(today.getDate()).padStart(2, '0');
+let endYear = String(today.getFullYear()); YYYY
 const WEATHER_USER_AGENT = 'parking-tool-v3 (contact: ddudak@gmail.com)';
 
 let parkingUrl = `https://api.nyc.gov/public/api/GetCalendar?fromdate=${month}%2F${day}%2F${year}&todate=${+month + 1}%2F${day}%2F${year}` 
 const weatherUrl = 'https://api.weather.gov/gridpoints/OKX/35,34/forecast'
-const timeUrl = 'https://worldtimeapi.org/api/timezone/America/New_York' 
+// const timeUrl = 'https://worldtimeapi.org/api/timezone/America/New_York' 
 
 const parkingRequest = new Request(parkingUrl, {
          method: 'GET',
@@ -37,52 +42,71 @@ async function getParking() {
 
 async function getWeather() {
     const   weatherResponse = await fetch(weatherRequest),
-            timeResponse = await fetch(timeUrl),
-            weatherJSON = await weatherResponse.json(),
-            timeJSON = await timeResponse.json()
-
-            return {weatherJSON, timeJSON};
+            weatherJSON = await weatherResponse.json()
+            return {weatherJSON};
 }
 
 async function fetchAllData() {
     const   parkingJSON = await getParking(),
-            {weatherJSON, timeJSON} = await getWeather();
+            {weatherJSON} = await getWeather();
 
             console.log('parking received, weather received. Returning results to formatters')
-            return {parkingJSON, weatherJSON, timeJSON };
+            return {parkingJSON, weatherJSON};
+}
+
+// use this to format all the parking dates
+function dateFormatter(date) {
+    const   year = date.slice(0,4),
+            month = date.slice(4,6),
+            day = date.slice(6,8),
+            result = `${year}-${month}-${day}`
+            return new Date(result).toDateString()
 }
 
 function formatParking(parkingJSON) {                    
 
-                // twoWeeks = {}
-                // console.log(`Parking: ${parking}`)
+        let suspension = null;
+        const  findSuspension = parkingJSON.days.find(day => day.items[0].status === 'SUSPENDED' );
+            
+            if (findSuspension) {
+                const formatted = dateFormatter(findSuspension.today_id);
+                // const   date = findSuspension.today_id,
+                //         year = date.slice(0,4),
+                //         month = date.slice(4,6),
+                //         day = date.slice(6,8),
 
-                // for (let i = 0; i < 14; i++) {
-                //     // this needs to be in the format of {day[i]: [details, status, type]} or {day[i]: {details: ,status: ,type: }}
-                //    ++Object.assign(twoWeeks, raw.days[i].items[0] )
-                // }
-        const   findSuspension = parkingJSON.days.find(day => day.items[0].status === 'SUSPENDED' ),
-                nextSuspension = `${findSuspension.items[0].exceptionName} (${findSuspension.today_id})`
+                //         result = `${year}-${month}-${day}`;
+                //         // more readable date format 
+                // const   formatted = new Date(result);
+                        
+                const suspension = {
+                    day: formatted,
+                    status: findSuspension.items[0].status,
+                    reason: findSuspension.items[0].exceptionName,
+                };
+            }
 
     return {
             details: parkingJSON.days[0].items[0].details,
             status: parkingJSON.days[0].items[0].status,
             tomorrow: parkingJSON.days[1].items[0].status,
             type: parkingJSON.days[0].items[0].type,
-            raw: parkingJSON,
-            nextSuspension: nextSuspension
+            suspension: suspension
             }
-    }
+    
+    
+}
 
-function formatWeather(weatherJSON, timeJSON) {
+
+
+function formatWeather(weatherJSON) {
     const   weather = weatherJSON,
             forecastUnformatted = weather.properties.periods[0].detailedForecast,
             forecast = forecastUnformatted.charAt(0).toLowerCase() + forecastUnformatted.slice(1);
             
     return {
             current: weather.properties.periods[0].name,
-            forecast: forecast,
-            time: timeJSON.datetime
+            forecast: forecast
             }
 }
 
@@ -92,20 +116,21 @@ function formatWeather(weatherJSON, timeJSON) {
 
 async function combineAPIData() {
     // Get all raw JSON
-    const   {parkingJSON, weatherJSON, timeJSON} = await fetchAllData(),
+    const   {parkingJSON, weatherJSON} = await fetchAllData(),
 
     // JSON >> objects
             parking = formatParking(parkingJSON), 
-            weather = formatWeather(weatherJSON, timeJSON),
+            weather = formatWeather(weatherJSON),
 
             //divide fields from objects
-            {details, status, type, tomorrow, nextSuspension, raw} = parking,
-            {current, forecast, time} = weather
+            {details, status, type, tomorrow, suspension} = parking,
+            {current, forecast} = weather
             let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
 
         return `
         ${months[month - 1]} ${day}, ${year} in NYC
+        Today: ${today}
         The ${type} Report
 
         Parking: ${details} 
@@ -114,11 +139,16 @@ async function combineAPIData() {
         ${current}, ${forecast}
 
         Tommorrow, parking rules are: ${tomorrow}
-        Next Suspension: ${nextSuspension} 
+
+        Next Suspension Date:
+                      
+        ${suspension.day}
+        Status: ${suspension.status}
+        Reason: ${suspension.reason} 
         `
 }
 
-const job = new CronJob('*/15 * * * * *', async () => {
+const job = new CronJob('*/5 * * * * *', async () => {
 	console.log('Cron initiated...') // true during callback execution
 	try {
         const fullData = await combineAPIData();
