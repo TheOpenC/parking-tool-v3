@@ -7,13 +7,16 @@ let month = String(today.getMonth()+1).padStart(2, '0'); //MM
 let day = String(today.getDate()).padStart(2, '0'); //DD
 let year = String(today.getFullYear()); //YYYY
 
-let endMonth = String(today.getMonth()+3).padStart(2, '0');
-    // if (endMonth == 10)
-let endDay = String(today.getDate()).padStart(2, '0');
-let endYear = String(today.getFullYear()); YYYY
+let endDate = new Date(today);
+endDate.setDate(endDate.getDate() + 60);
+
+let endMonth = String(endDate.getMonth() + 1).padStart(2, '0');
+let endDay = String(endDate.getDate()).padStart(2, '0');
+let endYear = String(endDate.getFullYear()); 
+
 const WEATHER_USER_AGENT = 'parking-tool-v3 (contact: ddudak@gmail.com)';
 
-let parkingUrl = `https://api.nyc.gov/public/api/GetCalendar?fromdate=${month}%2F${day}%2F${year}&todate=${+month + 1}%2F${day}%2F${year}` 
+let parkingUrl = `https://api.nyc.gov/public/api/GetCalendar?fromdate=${month}%2F${day}%2F${year}&todate=${endMonth}%2F${endDay}%2F${endYear}` 
 const weatherUrl = 'https://api.weather.gov/gridpoints/OKX/35,34/forecast'
 // const timeUrl = 'https://worldtimeapi.org/api/timezone/America/New_York' 
 
@@ -65,25 +68,19 @@ function dateFormatter(date) {
 
 function formatParking(parkingJSON) {                    
 
+        let twoWeeks = parkingJSON.days
         let suspension = null;
         const  findSuspension = parkingJSON.days.find(day => day.items[0].status === 'SUSPENDED' );
             
             if (findSuspension) {
                 const formatted = dateFormatter(findSuspension.today_id);
-                // const   date = findSuspension.today_id,
-                //         year = date.slice(0,4),
-                //         month = date.slice(4,6),
-                //         day = date.slice(6,8),
-
-                //         result = `${year}-${month}-${day}`;
-                //         // more readable date format 
-                // const   formatted = new Date(result);
-                        
-                const suspension = {
+                suspension = {
                     day: formatted,
                     status: findSuspension.items[0].status,
                     reason: findSuspension.items[0].exceptionName,
                 };
+            } else {
+                suspension = 'No upcoming suspensions in the next 60 days.'
             }
 
     return {
@@ -91,7 +88,7 @@ function formatParking(parkingJSON) {
             status: parkingJSON.days[0].items[0].status,
             tomorrow: parkingJSON.days[1].items[0].status,
             type: parkingJSON.days[0].items[0].type,
-            suspension: suspension
+            future: suspension
             }
     
     
@@ -123,7 +120,7 @@ async function combineAPIData() {
             weather = formatWeather(weatherJSON),
 
             //divide fields from objects
-            {details, status, type, tomorrow, suspension} = parking,
+            {details, status, type, tomorrow, future} = parking,
             {current, forecast} = weather
             let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
@@ -140,11 +137,11 @@ async function combineAPIData() {
 
         Tommorrow, parking rules are: ${tomorrow}
 
-        Next Suspension Date:
+        Next Suspension Date: (60 day range)
                       
-        ${suspension.day}
-        Status: ${suspension.status}
-        Reason: ${suspension.reason} 
+        ${future ? future.day : 'No upcoming suspensions'}
+        Status: ${future.status}
+        Reason: ${future.reason} 
         `
 }
 
