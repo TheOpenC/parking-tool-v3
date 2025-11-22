@@ -1,46 +1,6 @@
 const parkingJSON = {
     "days": [
         {
-            "today_id": "20251119",
-            "items": [
-                {
-                    "details": "Alternate side parking and meters are in effect.",
-                    "status": "IN EFFECT",
-                    "type": "Alternate Side Parking"
-                },
-                {
-                    "details": "Trash, recycling, and compost collections are on schedule.",
-                    "status": "ON SCHEDULE",
-                    "type": "Collections"
-                },
-                {
-                    "details": "Public schools are open.",
-                    "status": "OPEN",
-                    "type": "Schools"
-                }
-            ]
-        },
-        {
-            "today_id": "20251120",
-            "items": [
-                {
-                    "details": "Alternate side parking and meters are in effect.",
-                    "status": "IN EFFECT",
-                    "type": "Alternate Side Parking"
-                },
-                {
-                    "details": "Trash, recycling, and compost collections are on schedule.",
-                    "status": "ON SCHEDULE",
-                    "type": "Collections"
-                },
-                {
-                    "details": "Public schools are open.",
-                    "status": "OPEN",
-                    "type": "Schools"
-                }
-            ]
-        },
-        {
             "today_id": "20251121",
             "items": [
                 {
@@ -922,40 +882,26 @@ const parkingJSON = {
         }
     ]
 }     
-    let twoWeeks = parkingJSON.days.slice(1,15)
-    console.log(JSON.stringify(twoWeeks, null, 2));
+    let clone = parkingJSON.days.slice(1,15);
+    console.log(clone)
+    let twoWeeks = clone.map( day => {
+            
+        return `\n${dateFormatter(day.today_id)} : ${day.items[0].status}`
+    })
+    
+    console.log(twoWeeks)
     
 
-    const  findSuspension = parkingJSON.days.find(day => day.items[0].status === 'SUSPENDED' )
+
+
+    function dateFormatter(date) {
+    const   year = Number(date.slice(0,4)),
+            month = Number(date.slice(4,6)) - 1,
+            day = Number(date.slice(6,8)),
+            // result = `${year}-${month}-${day}`
+            result = new Date(year, month, day);
+            return result.toDateString()
+}
             
-            if (findSuspension) {
-                const   date = findSuspension.today_id,
-                        year = date.slice(0,4),
-                        month = date.slice(4,6),
-                        day = date.slice(6,8),
-
-                        result = `${year}-${month}-${day}`;
-                        
-                const   formatted = new Date(result);
-
-
-                        
-                const suspension = {
-                    day: formatted.toDateString(),
-                    status: findSuspension.items[0].status,
-                    reason: findSuspension.items[0].exceptionName,
-                    
-
-                };
-
-                console.log(`
-                    Next Suspension Date:
-                      
-                    ${suspension.day}
-                    Status: ${suspension.status}
-                    Reason: ${suspension.reason}
-                    `
-                    )
-            }
-            
+         
           

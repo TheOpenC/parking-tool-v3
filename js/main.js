@@ -59,16 +59,22 @@ async function fetchAllData() {
 
 // use this to format all the parking dates
 function dateFormatter(date) {
-    const   year = date.slice(0,4),
-            month = date.slice(4,6),
-            day = date.slice(6,8),
-            result = `${year}-${month}-${day}`
-            return new Date(result).toDateString()
+    const   year = Number(date.slice(0,4)),
+            month = Number(date.slice(4,6)) - 1,
+            day = Number(date.slice(6,8)),
+            
+            result = new Date(year, month, day);
+            return result.toDateString()
 }
 
 function formatParking(parkingJSON) {                    
+        // Two weeks 
+        let clone = parkingJSON.days.slice(1,15);
+        let twoWeeks = clone.map( day => {  
+        return `\n${dateFormatter(day.today_id)} : ${day.items[0].status}`
+    })
 
-        let twoWeeks = parkingJSON.days
+        // Suspension Code
         let suspension = null;
         const  findSuspension = parkingJSON.days.find(day => day.items[0].status === 'SUSPENDED' );
             
@@ -88,7 +94,8 @@ function formatParking(parkingJSON) {
             status: parkingJSON.days[0].items[0].status,
             tomorrow: parkingJSON.days[1].items[0].status,
             type: parkingJSON.days[0].items[0].type,
-            future: suspension
+            future: suspension,
+            fourteendays: twoWeeks
             }
     
     
@@ -120,29 +127,32 @@ async function combineAPIData() {
             weather = formatWeather(weatherJSON),
 
             //divide fields from objects
-            {details, status, type, tomorrow, future} = parking,
+            {details, status, type, tomorrow, future, fourteendays} = parking,
             {current, forecast} = weather
             let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
 
-        return `
-        ${months[month - 1]} ${day}, ${year} in NYC
-        Today: ${today}
-        The ${type} Report
-
-        Parking: ${details} 
-        Status: ${status}
+return `
+The ${type} Report
+${months[month - 1]} ${day}, ${year} in NYC
+Today: ${today}
         
-        ${current}, ${forecast}
+Parking: ${details} 
+Status: ${status}
+        
+${current}, ${forecast}
 
-        Tommorrow, parking rules are: ${tomorrow}
+Tommorrow, parking rules are: ${tomorrow}
 
-        Next Suspension Date: (60 day range)
+Next Suspension Date: (60 day range)
                       
-        ${future ? future.day : 'No upcoming suspensions'}
-        Status: ${future.status}
-        Reason: ${future.reason} 
-        `
+${future ? future.day : 'No upcoming suspensions'}
+Status: ${future.status}
+Reason: ${future.reason}
+
+Next two weeks:
+${fourteendays}
+`
 }
 
 const job = new CronJob('*/5 * * * * *', async () => {
