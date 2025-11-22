@@ -1,26 +1,35 @@
-// import express from 'express';
-// import dotenv from 'dotenv';
-// dotenv.config();
-
-// const app = express();              // 1) create the server
-// const PORT = 3001;                  // 2) choose a port
-
-// // serve static files
-// app.use(express.static('public'));
-
-// app.get('/api/calendar', (req, res) => {        // 3) handle GET / requests
-//     console.log('HIT /api/calendar', req.url); // debug print
-//     res.json({ ok: true, receivedPath: req.url }); // JSON on purpose
-
-// });
-
-// //
-// app.get('/hello', (req, res) => {
-//     res.send('Hello from Express'); // 4) send a response and end
-// })
+import express from 'express';
+import cors from 'cors';
+import { combineAPIData } from './js/report.js';
 
 
-// app.listen(PORT, () => {            // 5) start listening
-//     console.log(`http://localhost:${PORT}`);
-// });
+const app = express();
+app.use(cors());
 
+app.use((req, res, next) => {
+  console.log('[app.use] incoming:', req.method, req.url);
+  next();
+});
+
+app.get('/api/report', async (req, res) => {
+  console.log('[route] GET /api/report reached (calling combineAPIData)');
+  try {
+    const report = await combineAPIData();
+    console.log('[route] combineAPIData finished');
+    res.type('text/plain').send(report);
+  } catch (err) {
+    console.error('[route] combineAPIData error:', err);
+    res.status(500).type('text/plain').send('Error: ' + err.message);
+  }
+});
+
+
+app.use((req, res) => {
+  console.log('[fallback] no route matched for', req.method, req.url);
+  res.status(404).type('text/plain').send('No route matched\n');
+});
+
+const PORT = 3001;
+app.listen(PORT, () => {
+  console.log(`Server is listening on http://localhost:${PORT}`);
+});

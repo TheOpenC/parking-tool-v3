@@ -118,7 +118,7 @@ function formatWeather(weatherJSON) {
 
 
 
-async function combineAPIData() {
+export async function combineAPIData() {
     // Get all raw JSON
     const   {parkingJSON, weatherJSON} = await fetchAllData(),
 
@@ -133,7 +133,11 @@ async function combineAPIData() {
 
 
 return `
-The ${type} Report
+The ASpreP program is a tool for navigating future Alternate Side Parking suspensions. The tool provides reports of important data points such as current status, tomorrow's status, two week summary and any suspensions within the next 60 days. It also includes the weather for the next 6 hours 'cus why not? 
+
++ + + + + + + + + + + + + + + + + + + +
+
+The ASpreP Report
 ${months[month - 1]} ${day}, ${year} in NYC
 Today: ${today}
         
@@ -155,20 +159,5 @@ ${fourteendays}
 `
 }
 
-const job = new CronJob('*/5 * * * * *', async () => {
-	console.log('Cron initiated...') // true during callback execution
-	try {
-        const fullData = await combineAPIData();
-        console.log(fullData)
-    } catch (err) {
-        console.error('[Cron], combineAPIData has failed:', err.message);
-        if (err.cause) {
-            console.error('cause: ', err.cause);
-        }
-    }
-});
 
-
-job.start()
-
-
+// console.log(combineAPIData())

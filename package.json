@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@xterm/xterm": "^5.5.0",
+    "cors": "^2.8.5",
     "cron": "^4.3.4",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
