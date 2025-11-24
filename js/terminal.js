@@ -18,15 +18,54 @@ document.addEventListener('DOMContentLoaded', () => {
   // Optional: refit when browser window resizes
   window.addEventListener('resize', () => fitAddon.fit());
 
+//   this is by character
+  function typeText(term, text, delay = 5) {
+    // convert text new lines to terminal-style new lines
+    const formatted = text.replace(/\n/g, '\r\n');
+
+    let i = 0
+
+    const intervalId = setInterval(() => {
+        if (i >= formatted.length) {
+            clearInterval(intervalId);
+            return;
+        }
+        
+        term.write(formatted[i]);
+        i++;
+    }, delay);
+  }
+
+  // this is by line
+  function typeLines(term, text, lineDelay = 30, done) {
+    const lines = text.split('\n');
+    let i = 0;
+
+    const intervalId = setInterval(() => {
+        if (i >= lines.length) {
+            clearInterval(intervalId);
+            if (typeof done === 'function') done();
+            return;
+        }
+
+        term.writeln(lines[i]);
+        i++;
+    }, lineDelay);
+  }
+
                                                                                                                     
-term.writeln(`                                                                                                                      
+// term.writeln(`
+                                                                                                                      
+//  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
+//  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
+//  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
+//  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
+//  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
+
+ const headerArt = 
+ `
  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
+ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  
  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
@@ -71,28 +110,29 @@ term.writeln(`
 ASP pre-Parking (ASipP report)  
 
 ASipP is a resource designed and maintained by Drew Dudak for navigating future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, two week summary and upcoming suspensions with the intent on providing users information for pre-parking to hit consecutive, multi-week ASP suspensions. ASipP gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. It does include the weather for the next 6 hours 'cus why not?
-`);
-
-  term.writeln('Fetching report...\r\n');
+`;
+  
+  
 
 //   fetch('http://localhost:3001/api/report')
 
 //read from txt file
-fetch('http://localhost:3001/report.txt')
-    .then(res => res.text())
-    .then(text => term.writeln(text.replace(/\n/g, '\r\n')))
-    .catch(err => term.writeln('Error: ' + err.message));
+typeLines(term, headerArt, 35, () => {
+
+    term.writeln('Fetching report...\r\n');
+
+        setTimeout(() => {
+            fetch('http://localhost:3001/report.txt')
+                .then(res => res.text())
+                // .then(text => term.writeln(text.replace(/\n/g, '\r\n')))
+                .then(text => {
+                    term.writeln('\r\n')
+                    typeText(term, text, 5);
+                })
+                .catch(err => term.writeln('Error: ' + err.message));
+            }, 1000);
+
+    })
+
 });
 
-// Delay effect
-function typeWriter(terminal, text, delay) {
-    let i = 0;
-    function printChar() {
-        if (i < text.length) {
-            terminal.write(text.charAt(i));
-            i++;
-            setTimeout(printChar, delay);
-        }
-    }
-    printChar();
-}

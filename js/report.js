@@ -127,7 +127,7 @@ export async function combineAPIData() {
     // Get all raw JSON
     const   {parkingJSON, weatherJSON} = await fetchAllData(),
 
-    // JSON >> objects
+            // JSON >> objects
             parking = formatParking(parkingJSON), 
             weather = formatWeather(weatherJSON),
 
@@ -136,49 +136,55 @@ export async function combineAPIData() {
             {current, forecast} = weather
             let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
+    const   red = '';
+    const   green = "\x1b[48;5;2m\x1b[38;5;15m";
+    const   yellowBlk = "\x1b[48;5;3m\x1b[38;5;16;1m"
+    const   close = "\x1b[0m"
+    const   twoClose = "\x1b\x1b[0m"
 
+
+
+
+    
+
+   
 return `
-
 + + + + + + + + + + + + + + + + + + + +
 
-\x1b[91mThe ASipP Report\x1b[0m.
-${today}, New York City
-Weather: ${current}, ${forecast}
+The ASipP Report.
+\x1b[38;5;200;1m${today}, New York City\x1b[0m
+\x1b[38;5;15;4mWeather\x1b[0m: ${current}, ${forecast}
         
-Current:
-Status: ${status}
-Details: ${details} 
+\x1b[38;5;15;4mToday\x1b[0m:
+\x1b[48;5;3m\x1b[38;5;16;1m${status == "IN EFFECT" ? status : ""}\x1b\x1b${close}\x1b[48;5;2m\x1b[38;5;15m${status == "NOT IN EFFECT" || status == "SUSPENDED" ? status : ""}\x1b\x1b${close}
+${details} 
         
-Tommorrow:
-${tomorrowDate}, parking rules are: ${tomorrowStatus}
+\x1b[38;5;15;4mTomorrow\x1b[0m:
+${tomorrowDate}
+\x1b[48;5;2m\x1b[38;5;15m${tomorrowStatus}\x1b\x1b[0m
 
-Next Suspension Date: (60 day range)
-                      
+\x1b[38;5;15;4mNext Suspension Date\x1b[0m:           
 ${future ? future.day : 'No upcoming suspensions'}
-Status: ${future.status}
-Reason: ${future.reason}
+${future.status}
+${future.reason}
 
-Next two weeks:
+\x1b[38;5;15;4mNext two weeks\x1b[0m:
 ${fourteenDays}
 
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-Disclaimer:
 
-This tool is provided for informational purposes only. While every effort is made to ensure the accuracy and timeliness of the data displayed, no guarantees are made regarding completeness, correctness, or real-time accuracy. Parking regulations, street signage, suspensions, and enforcement policies may change at any time and official posted signs always take precedence.
 
-By using this report, you acknowledge and agree that:
-
-You remain solely responsible for complying with all posted parking regulations.
-
-You assume all risk for any parking tickets, fines, towing, or penalties incurred.
-
-The developer of this tool bears no liability for errors, omissions, delays, incorrect data, or consequences resulting from reliance on the information provided.
-
-If you need authoritative parking information, consult official NYC DOT / 311 sources or the physical signage at your parking location.
 `
 }
 
+// \x1b[38;5;15;3mDisclaimer: This report is for general information only.
+// Parking rules, suspensions, and posted signs may change at any time, and official street signs always override this report.
 
+// By using this tool, you agree that you are solely responsible for following all parking regulations.
+// You assume all risk for any tickets, fines, or towing.
+// The developer is not liable for errors, delays, or inaccuracies in the data.
+
+// For official information, always check NYC DOT / 311 or the posted signage at your location.\x1b[0m
 
 
 // console.log(combineAPIData())

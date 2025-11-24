@@ -1,27 +1,25 @@
 
-
 + + + + + + + + + + + + + + + + + + + +
 
-[91mThe ASipP Report[0m.
-Sun Nov 23 2025 17:39:30 GMT-0500 (Eastern Standard Time), New York City
-Weather: This Afternoon, partly sunny. High near 50, with temperatures falling to around 47 in the afternoon. West wind around 10 mph, with gusts as high as 21 mph.
+The ASipP Report.
+[38;5;200;1mMon Nov 24 2025 00:31:47 GMT-0500 (Eastern Standard Time), New York City[0m
+[38;5;15;4mWeather[0m: This Afternoon, partly sunny. High near 50, with temperatures falling to around 47 in the afternoon. West wind around 10 mph, with gusts as high as 21 mph.
         
-Current:
-Status: NOT IN EFFECT
-Details: Alternate side parking and meters are not in effect on Sundays. 
+[38;5;15;4mToday[0m:
+[48;5;3m[38;5;16;1mIN EFFECT[0m[48;5;2m[38;5;15m[0m
+Alternate side parking and meters are in effect. 
         
-Tommorrow:
-Mon Nov 24 2025, parking rules are: IN EFFECT
+[38;5;15;4mTomorrow[0m:
+Tue Nov 25 2025
+[48;5;2m[38;5;15mIN EFFECT[0m
 
-Next Suspension Date: (60 day range)
-                      
+[38;5;15;4mNext Suspension Date[0m:           
 Thu Nov 27 2025
-Status: SUSPENDED
-Reason: Thanksgiving Day 2025
+SUSPENDED
+Thanksgiving Day 2025
 
-Next two weeks:
+[38;5;15;4mNext two weeks[0m:
 
-Mon Nov 24 2025 : IN EFFECT,
 Tue Nov 25 2025 : IN EFFECT,
 Wed Nov 26 2025 : IN EFFECT,
 Thu Nov 27 2025 : SUSPENDED,
@@ -34,19 +32,9 @@ Wed Dec 03 2025 : IN EFFECT,
 Thu Dec 04 2025 : IN EFFECT,
 Fri Dec 05 2025 : IN EFFECT,
 Sat Dec 06 2025 : IN EFFECT,
-Sun Dec 07 2025 : NOT IN EFFECT
+Sun Dec 07 2025 : NOT IN EFFECT,
+Mon Dec 08 2025 : SUSPENDED
 
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-Disclaimer:
 
-This tool is provided for informational purposes only. While every effort is made to ensure the accuracy and timeliness of the data displayed, no guarantees are made regarding completeness, correctness, or real-time accuracy. Parking regulations, street signage, suspensions, and enforcement policies may change at any time and official posted signs always take precedence.
 
-By using this report, you acknowledge and agree that:
-
-You remain solely responsible for complying with all posted parking regulations.
-
-You assume all risk for any parking tickets, fines, towing, or penalties incurred.
-
-The developer of this tool bears no liability for errors, omissions, delays, incorrect data, or consequences resulting from reliance on the information provided.
-
-If you need authoritative parking information, consult official NYC DOT / 311 sources or the physical signage at your parking location.
