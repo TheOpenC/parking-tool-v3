@@ -1,6 +1,8 @@
-import {CronJob} from 'cron';
+// import {CronJob} from 'cron';
+
 import dotenv from 'dotenv';
 dotenv.config();
+
 
 let today = new Date();
 let month = String(today.getMonth()+1).padStart(2, '0'); //MM
@@ -73,6 +75,8 @@ function formatParking(parkingJSON) {
         let twoWeeks = clone.map( day => {  
         return `\n${dateFormatter(day.today_id)} : ${day.items[0].status}`
     })
+        //tomorrow date format
+        let tomorrow = dateFormatter(parkingJSON.days[1].today_id)
 
         // Suspension Code
         let suspension = null;
@@ -92,10 +96,11 @@ function formatParking(parkingJSON) {
     return {
             details: parkingJSON.days[0].items[0].details,
             status: parkingJSON.days[0].items[0].status,
-            tomorrow: parkingJSON.days[1].items[0].status,
+            tomorrowStatus: parkingJSON.days[1].items[0].status,
             type: parkingJSON.days[0].items[0].type,
             future: suspension,
-            fourteendays: twoWeeks
+            fourteenDays: twoWeeks,
+            tomorrowDate: tomorrow
             }
     
     
@@ -127,26 +132,25 @@ export async function combineAPIData() {
             weather = formatWeather(weatherJSON),
 
             //divide fields from objects
-            {details, status, type, tomorrow, future, fourteendays} = parking,
+            {details, status, type, tomorrowStatus, future, fourteenDays, tomorrowDate} = parking,
             {current, forecast} = weather
             let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
 
 return `
-The ASpreP program is a tool for navigating future Alternate Side Parking suspensions. The tool provides reports of important data points such as current status, tomorrow's status, two week summary and any suspensions within the next 60 days. It also includes the weather for the next 6 hours 'cus why not? 
 
 + + + + + + + + + + + + + + + + + + + +
 
-The ASpreP Report
-${months[month - 1]} ${day}, ${year} in NYC
-Today: ${today}
+\x1b[91mThe ASipP Report\x1b[0m.
+${today}, New York City
+Weather: ${current}, ${forecast}
         
-Parking: ${details} 
+Current:
 Status: ${status}
+Details: ${details} 
         
-${current}, ${forecast}
-
-Tommorrow, parking rules are: ${tomorrow}
+Tommorrow:
+${tomorrowDate}, parking rules are: ${tomorrowStatus}
 
 Next Suspension Date: (60 day range)
                       
@@ -155,9 +159,26 @@ Status: ${future.status}
 Reason: ${future.reason}
 
 Next two weeks:
-${fourteendays}
+${fourteenDays}
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Disclaimer:
+
+This tool is provided for informational purposes only. While every effort is made to ensure the accuracy and timeliness of the data displayed, no guarantees are made regarding completeness, correctness, or real-time accuracy. Parking regulations, street signage, suspensions, and enforcement policies may change at any time and official posted signs always take precedence.
+
+By using this report, you acknowledge and agree that:
+
+You remain solely responsible for complying with all posted parking regulations.
+
+You assume all risk for any parking tickets, fines, towing, or penalties incurred.
+
+The developer of this tool bears no liability for errors, omissions, delays, incorrect data, or consequences resulting from reliance on the information provided.
+
+If you need authoritative parking information, consult official NYC DOT / 311 sources or the physical signage at your parking location.
 `
 }
+
+
 
 
 // console.log(combineAPIData())
