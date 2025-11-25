@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
    const headerArt =
  `
+
+
+ 
          ⠀⠀⠀⠀⠀⣀⡤⢄⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠶⠦⡞⢳⣶⡄⠙⡄⣀⣀⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⡏⠀⣠⣤⣹⡜⠛⠁⣠⠗⠛⠉⠙⢳⡀
