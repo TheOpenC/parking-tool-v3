@@ -75,7 +75,9 @@ ASipP is a resource designed and maintained by Drew Dudak for navigating future 
 
   // functions running
   typeLines(pre, headerArt, 45, () => {
-    pre.innerText += 'Fetching report...\n';
+    pre.innerText += `
+    Fetching report...\n
+    `;
 
         // setTimeout(() => {
         //     fetch('/.netlify/functions/report')

@@ -4,18 +4,6 @@ html, body {
   overflow-x: auto; 
 }
 
-/* #terminal {
-  width: 85%;
-  height: 800px;
-  margin: 4rem auto;
-  padding: 10px;
-
-  overflow: hidden;
-  background: black;
-  filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
-  
-} */
-
 #pre-display{
   width: 85%;
   max-height: 80vh;      /* prevents full-page blowout */
@@ -28,7 +16,6 @@ html, body {
   word-break: break-all;
   text-wrap-mode: wrap;
   white-space-collapse: preserve;
-  
 
   font-family: courier-new, courier, monospace;
   font-size: 15px;
@@ -43,6 +30,29 @@ html, body {
   margin: 4rem auto;
   filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
 }
+
+@media(max-width: 700px){
+  #pre-display{
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+    width: 85%;
+    height: 90vh;
+  }
+} 
+
+/* #terminal {
+  width: 85%;
+  height: 800px;
+  margin: 4rem auto;
+  padding: 10px;
+
+  overflow: hidden;
+  background: black;
+  filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
+  
+} */
+
 /* .xterm-screen{
     width: 85%;
     height: 1000px;
@@ -58,16 +68,3 @@ html, body {
   height: 100% !important;
 }
 */ 
-
-@media(max-width: 700px){
-  #pre-display{
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    word-break: break-all;
-    width: 85%;
-    height: 90vh;
-  
-      
-  
-  }
-} 
