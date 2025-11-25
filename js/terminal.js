@@ -171,6 +171,7 @@ typeLines(term, headerArt, 45, () => {
                 .then(text => {
                     term.writeln('\r\n')
                     typeText(term, text, 5);
+                    term.scrollToBottom();
                 })
                 .catch(err => term.writeln('Error: ' + err.message));
             }, 2500);
