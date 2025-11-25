@@ -15,6 +15,36 @@ html, body {
   filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
   
 }
+
+#pre-display{
+  width: 85%;
+  padding: 10px;
+  max-height: 80vh;      /* prevents full-page blowout */
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+
+  
+  white-space: pre; /* wrap long text without breaking formatting */
+  overflow-wrap: anywhere;
+  word-break: break-all;
+  text-wrap-mode: wrap;
+  white-space-collapse: preserve;
+  
+
+  font-family: courier-new, courier, monospace;
+  font-size: 15px;
+  line-height: 16px;
+  letter-spacing: normal;
+  font-kerning: none;
+  /* letter-spacing: ; */
+  font-weight: 400;
+
+  background: #111;
+  color: white;
+  margin: 4rem auto;
+  filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
+}
 .xterm-screen{
     width: 85%;
     height: 1000px;
