@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         pre.innerText += lines[i] + '\n';
         i++;
+
+        pre.scrollTop = pre.scrollHeight;
     }, lineDelay);
 
   }
