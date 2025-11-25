@@ -13,8 +13,7 @@ html, body {
   overflow: hidden;
   background: black;
   filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
-  pointer-events: none;
-  user-select: none;
+  
 }
 .xterm-screen{
     width: 80%;
@@ -33,6 +32,8 @@ html, body {
 
 @media(max-width: 700px){
   #terminal{
-    height: 1000px
+    height: 1000px;
+    pointer-events: none;
+  user-select: none;
   }
 }
