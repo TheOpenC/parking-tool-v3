@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 ⠀⣠⡶⢋⡄⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠚⣿⠍⢀⣀⠉:
 ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ :
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-Alternate Side preParking report 
+Alternate Side preParking report
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
  █████╗ ███████╗██╗██████╗ ██████╗
