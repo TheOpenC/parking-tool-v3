@@ -171,7 +171,7 @@ typeLines(term, headerArt, 35, () => {
                     typeText(term, text, 5);
                 })
                 .catch(err => term.writeln('Error: ' + err.message));
-            }, 1000);
+            }, 2500);
 
     })
 
