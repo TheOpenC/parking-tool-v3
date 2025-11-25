@@ -4,17 +4,17 @@ html, body {
   overflow-x: hidden; 
 }
 
-#terminal {
+/* #terminal {
   width: 85%;
   height: 800px;
   margin: 4rem auto;
   padding: 10px;
-  /* should be VERY obvious */
+
   overflow: hidden;
   background: black;
   filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
   
-}
+} */
 
 #pre-display{
   width: 85%;
@@ -45,7 +45,7 @@ html, body {
   margin: 4rem auto;
   filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
 }
-.xterm-screen{
+/* .xterm-screen{
     width: 85%;
     height: 1000px;
 }
@@ -54,7 +54,7 @@ html, body {
 }
 
 /* this is the internal scrolling area – turn off its scrollbars */
-#terminal .xterm-viewport {
+/* #terminal .xterm-viewport {
   overflow-y: hidden !important;
   overflow-x: hidden !important;
   height: 100% !important;
@@ -65,7 +65,7 @@ html, body {
     width: 85%;
     height: 1500px;
     pointer-events: none;
-      filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
+      
   
   }
-}
+} */ 
