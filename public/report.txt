@@ -2,17 +2,17 @@
 + + + + + + + + + + + + + + + + + + + +
 
 The ASipP Report.
-[38;5;200;1mMon Nov 24 2025 01:36:56 GMT-0500 (Eastern Standard Time)[0m, New York City
+[38;5;200;1mMon Nov 24 2025 14:18:00 GMT-0500 (Eastern Standard Time)[0m, New York City
 [38;5;15;4mWeather[0m: 
-Overnight, mostly clear, with a low around 40. West wind around 12 mph.
+This Afternoon, sunny. High near 54, with temperatures falling to around 50 in the afternoon. Northwest wind 6 to 9 mph.
         
 [38;5;15;4mToday[0m:
-[48;5;3m[38;5;16;1mIN EFFECT[0m[48;5;2m[38;5;15m[0m
+[48;5;3m[38;5;16;1mIN EFFECT[0m[48;5;2m[38;5;15m[0m
 Alternate side parking and meters are in effect. 
         
 [38;5;15;4mTomorrow[0m:
 Tue Nov 25 2025
-[48;5;3m[38;5;16;1mIN EFFECT[0m[48;5;2m[38;5;15m[0m
+[48;5;3m[38;5;16;1mIN EFFECT[0m[48;5;2m[38;5;15m[0m
 
 [38;5;15;4mNext Suspension Date[0m:           
 Thu Nov 27 2025

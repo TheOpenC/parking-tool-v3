@@ -152,24 +152,24 @@ return `
 + + + + + + + + + + + + + + + + + + + +
 
 The ASipP Report.
-\x1b[38;5;200;1m${today}\x1b[0m, New York City
-\x1b[38;5;15;4mWeather\x1b[0m: 
+\x1b[38;5;200;1m${today}${close}, New York City
+\x1b[38;5;15;4mWeather${close}: 
 ${current}, ${forecast}
         
-\x1b[38;5;15;4mToday\x1b[0m:
-\x1b[48;5;3m\x1b[38;5;16;1m${status == "IN EFFECT" ? status : ""}\x1b\x1b${close}\x1b[48;5;2m\x1b[38;5;15m${status == "NOT IN EFFECT" || status == "SUSPENDED" ? status : ""}\x1b\x1b${close}
+\x1b[38;5;15;4mToday${close}:
+\x1b[48;5;3m\x1b[38;5;16;1m${status == "IN EFFECT" ? status : ""}${twoClose}\x1b[48;5;2m\x1b[38;5;15m${status == "NOT IN EFFECT" || status == "SUSPENDED" ? status : ""}${twoClose}
 ${details} 
         
-\x1b[38;5;15;4mTomorrow\x1b[0m:
+\x1b[38;5;15;4mTomorrow${close}:
 ${tomorrowDate}
-\x1b[48;5;3m\x1b[38;5;16;1m${tomorrowStatus == "IN EFFECT" ? tomorrowStatus : ""}\x1b\x1b${close}\x1b[48;5;2m\x1b[38;5;15m${tomorrowStatus == "NOT IN EFFECT" || tomorrowStatus == "SUSPENDED" ? tomorrowStatus : ""}\x1b\x1b${close}
+\x1b[48;5;3m\x1b[38;5;16;1m${tomorrowStatus == "IN EFFECT" ? tomorrowStatus : ""}${twoClose}\x1b[48;5;2m\x1b[38;5;15m${tomorrowStatus == "NOT IN EFFECT" || tomorrowStatus == "SUSPENDED" ? tomorrowStatus : ""}${twoClose}
 
-\x1b[38;5;15;4mNext Suspension Date\x1b[0m:           
+\x1b[38;5;15;4mNext Suspension Date${close}:           
 ${future ? future.day : 'No upcoming suspensions'}
 ${future.status}
 ${future.reason}
 
-\x1b[38;5;15;4mNext two weeks\x1b[0m:
+\x1b[38;5;15;4mNext two weeks${close}:
 ${fourteenDays}
 
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

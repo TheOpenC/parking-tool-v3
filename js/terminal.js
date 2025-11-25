@@ -118,8 +118,9 @@ typeLines(term, headerArt, 35, () => {
 
     term.writeln('Fetching report...\r\n');
 
+    //'http://localhost:3001/report.txt'
         setTimeout(() => {
-            fetch('http://localhost:3001/report.txt')
+            fetch('/.netlify/functions/report')
                 .then(res => res.text())
                 // .then(text => term.writeln(text.replace(/\n/g, '\r\n')))
                 .then(text => {
