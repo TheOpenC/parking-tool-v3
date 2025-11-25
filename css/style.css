@@ -16,7 +16,7 @@ html, body {
   
 }
 .xterm-screen{
-    width: 80%;
+    width: 85%;
     height: 1000px;
 }
 #terminal .xterm {
@@ -32,7 +32,8 @@ html, body {
 
 @media(max-width: 700px){
   #terminal{
-    height: 1000px;
+    width: 85%;
+    height: 1500px;
     pointer-events: none;
   
   }
