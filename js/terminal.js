@@ -133,11 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
 ⠀⠀⠀⠀⠀⢠⡿⢠⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠇⠈⢧
 ⠀⠀⠀⠀⠀⣰⠃⣸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⡀
 ⠀⠀⠀⠀⢼⡷⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⣄
-⠀⠀⠀⢠⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣈⡓⢤
-⠀⣠⡶⢋⡄⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠚⣿⠍⢀⣀⠉⠓⠀⠀⠀
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+⠀⠀⠀⢠⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣈⡓
+⠀⣠⡶⢋⡄⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠚⣿⠍⢀⣀⠉:
+░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ :
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+Alternate Side (pre) Parking rep. 
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
  █████╗ ███████╗██╗██████╗ ██████╗
 ██╔══██╗██╔════╝██║██╔══██╗██╔══██╗
 ███████║███████╗██║██████╔╝██████╔╝
@@ -146,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
 ╚═╝  ╚═╝╚══════╝╚═╝╚═╝     ╚═╝
 
 DREWD (2025)
-Alternate Side (pre-) Parking report 
 (ASipP)
 
 ASipP is a resource designed and maintained by Drew Dudak for navigating future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, two week summary and upcoming suspensions with the intent on providing users information for pre-parking to hit consecutive, multi-week ASP suspensions. ASipP gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. It does include the weather for the next 6 hours 'cus why not?
@@ -157,7 +158,7 @@ ASipP is a resource designed and maintained by Drew Dudak for navigating future 
 //   fetch('http://localhost:3001/api/report')
 
 //read from txt file
-typeLines(term, headerArt, 35, () => {
+typeLines(term, headerArt, 45, () => {
 
     term.writeln('Fetching report...\r\n');
 
