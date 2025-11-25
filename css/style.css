@@ -33,6 +33,6 @@ html, body {
 
 @media(max-width: 700px){
   #terminal{
-    height: 575px
+    height: 1000px
   }
 }
