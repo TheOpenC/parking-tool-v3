@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; 
+  overflow-x: auto; 
 }
 
 /* #terminal {
@@ -18,12 +18,10 @@ html, body {
 
 #pre-display{
   width: 85%;
-  padding: 10px;
   max-height: 80vh;      /* prevents full-page blowout */
   overflow-y: auto;
-  overflow-x: hidden;
-  
-
+  padding: 10px;
+  /* overflow-x: hidden; */
   
   white-space: pre; /* wrap long text without breaking formatting */
   overflow-wrap: anywhere;
@@ -59,13 +57,17 @@ html, body {
   overflow-x: hidden !important;
   height: 100% !important;
 }
+*/ 
 
 @media(max-width: 700px){
   #terminal{
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-all;
     width: 85%;
     height: 1500px;
     pointer-events: none;
       
   
   }
-} */ 
+} 
