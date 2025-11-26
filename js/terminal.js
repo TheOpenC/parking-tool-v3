@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
  `
 
 
- 
+
          ⠀⠀⠀⠀⠀⣀⡤⢄⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠶⠦⡞⢳⣶⡄⠙⡄⣀⣀⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⡏⠀⣠⣤⣹⡜⠛⠁⣠⠗⠛⠉⠙⢳⡀
@@ -83,17 +83,17 @@ ASipP is a resource designed and maintained by Drew Dudak for navigating future 
     pre.innerText += `Fetching report...\n`;
     pre.scrollTop = pre.scrollHeight;
 
-        // setTimeout(() => {
-        //     fetch('/.netlify/functions/report')
-        //         .then(res => res.text())            
-        //         .then(text => {
-        //             pre.textContent += '\n'
-        //             typeText(pre, text, 5);
-        //         })
-        //         .catch(err => {
-        //           pre.textContent += '\nError: ' + err.message;
-        //     });
-        // }, 2500);
+        setTimeout(() => {
+            fetch('/.netlify/functions/report')
+                .then(res => res.text())            
+                .then(text => {
+                    pre.textContent += '\n'
+                    typeText(pre, text, 5);
+                })
+                .catch(err => {
+                  pre.textContent += '\nError: ' + err.message;
+            });
+        }, 2500);
   });
 
 })
