@@ -1,5 +1,3 @@
-import { getStore } from "@netlify/blobs";
-
 export default async (req) => {
     const { next_run } = await req.json()
 
@@ -8,5 +6,5 @@ export default async (req) => {
 
 // tell netlify when to run 
 export const config = {
-    shedule: "@hourly", 
+    schedule: "@hourly", 
 }
