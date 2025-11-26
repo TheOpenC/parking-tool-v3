@@ -1,17 +1,25 @@
-export async function handler(event, context) {
-    // fake report for testing
-    const reportText = `
-   
-    NYC Parking & Weather Tool
---------------------------
-This is a test report coming from a Netlify Function.
-Soon this will be your real parking + weather data.
-    `.trim();
+import { getStore } from '@netlify/blobs';
 
-    return {
-        statusCode: 200,
-        headers: { 'Content-Type': 'text/plain'},
-        body: reportText,
-    };
+
+export default async () => {
+    const store = getStore('parking-reports');
+
+    //try to get the cached text report
+    const cached = await store.get('latest', { type: 'text'});
+
+    if (!cached) {
+        //this happens if the scheduler hasn't successfully written yet
+        return new Response(
+            'ASipP report is not availble yet. Try again after the next scheduled run.',
+            { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } }
+        );
+    }
+    
+    return new Response(cached, {
+        status: 200,
+        headers: {"Content-Type": "text/plain; charset=utf-8" },
+    });
 }
+
+
 
