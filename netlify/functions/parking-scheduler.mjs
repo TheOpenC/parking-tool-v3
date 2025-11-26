@@ -8,5 +8,5 @@ export default async (req) => {
 
 // tell netlify when to run 
 export const config = {
-    shedule: "0 6 * * *", 
+    shedule: "@hourly", 
 }
