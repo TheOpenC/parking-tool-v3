@@ -150,7 +150,7 @@ function buildReport(parkingJSON, weatherJSON) {
     
     
 
-        return`
+        return `
 + + + + + + + + + + + + + + + + + + + +
 The ASipP Report.
 <span class="fuchsia">${today.toDateString()}</span>, New York City
