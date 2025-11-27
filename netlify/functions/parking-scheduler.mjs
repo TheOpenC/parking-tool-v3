@@ -164,10 +164,12 @@ ${details}
 <span class="underline">Tomorrow</span>:
 ${tomorrowDate}
 ${colorStatus(tomorrowStatus)}
+
 <span class="underline">Next Suspension Date</span>:           
 ${future ? future.day : 'No upcoming suspensions.'}
 ${future ? future.status : ''}
 ${future ? future.reason : ''}
+
 <span class="underline">Next Two Weeks</span>:
 ${fourteenDays.join('\n')}
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
