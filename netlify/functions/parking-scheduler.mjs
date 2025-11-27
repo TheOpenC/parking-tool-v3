@@ -1,8 +1,8 @@
 import { getStore } from "@netlify/blobs";
 
-console.log('[scheduler] env check', {
-  hasOcpKey: !!process.env.OCP_KEY,
-});
+// console.log('[scheduler] env check', {
+//   hasOcpKey: !!process.env.OCP_KEY,
+// });
 
 
 // ================================================================
