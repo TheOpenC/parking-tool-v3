@@ -4,7 +4,7 @@ html, body {
   overflow-x: auto; 
 }
 
-#pre-display{
+#terminal{
   width: 85%;
   max-height: 80vh;      /* prevents full-page blowout */
   overflow-y: auto;
@@ -31,8 +31,11 @@ html, body {
   filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
 }
 
+
+
+
 @media(max-width: 700px){
-  #pre-display{
+  #terminal{
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     word-break: break-all;
@@ -41,6 +44,52 @@ html, body {
   }
 } 
 
+/*  Span colors + styling  */
+
+/* Official system colors for xterm  */
+.black { color: #000;}
+.maroon { color: #800000;}
+.green { color: #008000;}
+.olive { color: #808000;}
+.navy { color: #000080;}
+.purple { color: #800080;}
+.teal { color: #008080;}
+.silver { color: #c0c0c0;}
+.grey { color: #808080;}
+.red { color: #ff0000;}
+.lime { color: #00ff00;}
+.yellow { color: #ffff00;}
+.blue { color: #0000ff;}
+.fuchsia { color: #ff00ff;}
+.aqua { color: #00ffff;}
+.white { color: #fff;}
+
+/* highlighting */
+.hBlack { background-color: #000;}
+.hMaroon { background-color: #800000;}
+.hGreen { background-color: #008000;}
+.hOlive { background-color: #808000;}
+.hNavy { background-color: #000080;}
+.hPurple { background-color: #800080;}
+.hTeal { background-color: #008080;}
+.hSilver { background-color: #c0c0c0;}
+.hGrey { background-color: #808080;}
+.hRed { background-color: #ff0000;}
+.hLime { background-color: #00ff00;}
+.hYellow { background-color: #ffff00;}
+.hBlue { background-color: #0000ff;}
+.hFuchsia { background-color: #ff00ff;}
+.hAqua { background-color: #00ffff;}
+.hWhite { background-color: #fff;}
+
+/* text styling */
+.bold { font-weight: bold;}
+.italic { font-style: italic;}
+.underline { text-decoration: underline;}
+
+
+
+/* OLD XTERM STYLING */
 /* #terminal {
   width: 85%;
   height: 800px;

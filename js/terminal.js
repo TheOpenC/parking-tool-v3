@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const pre = document.getElementById('pre-display');
+  const pre = document.getElementById('terminal');
 
   function typeText(pre, text, delay = 5) {
     const formatted = text.replace(/\n/g, '\n')
