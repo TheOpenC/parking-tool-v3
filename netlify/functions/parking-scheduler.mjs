@@ -152,6 +152,7 @@ function buildReport(parkingJSON, weatherJSON) {
 
 return `
 + + + + + + + + + + + + + + + + + + + +
+
 The ASipP Report.
 <span class="fuchsia">${today.toDateString()}</span>, New York City
 <span class="underline">Weather</span>: 
@@ -172,7 +173,8 @@ ${future ? future.reason : ''}
 
 <span class="underline">Next Two Weeks</span>:
 ${fourteenDays.join('\n')}
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
++ + + + + + + + + + + + + + + + + + + +
 `
 
 }
