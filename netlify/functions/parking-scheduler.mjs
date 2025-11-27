@@ -150,37 +150,30 @@ function buildReport(parkingJSON, weatherJSON) {
     
     
 
-        return `
-        + + + + + + + + + + + + + + + + + + + +
-
-        The ASipP Report.
-        <span class="fuchsia">${today.toDateString()}</span>, New York City
-        <span class="underline">Weather</span>: 
-        ${current}, ${forecast}
-                
-        <span class="underline">Today</span>:
-        ${colorStatus(status)}
-        ${details} 
-                
-        <span class="underline">Tomorrow</span>:
-        ${tomorrowDate}
-        ${colorStatus(tomorrowStatus)}
-
-        <span class="underline">Next Suspension Date</span>:           
-        ${future ? future.day : 'No upcoming suspensions.'}
-        ${future ? future.status : ''}
-        ${future ? future.reason : ''}
-
-        <span class="underline">Next Two Weeks</span>:
-        ${fourteenDays.join('\n')}
-
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-        `
+        return`
++ + + + + + + + + + + + + + + + + + + +
+The ASipP Report.
+<span class="fuchsia">${today.toDateString()}</span>, New York City
+<span class="underline">Weather</span>: 
+${current}, ${forecast}
+            
+<span class="underline">Today</span>:
+${colorStatus(status)}
+${details} 
+        
+<span class="underline">Tomorrow</span>:
+${tomorrowDate}
+${colorStatus(tomorrowStatus)}
+<span class="underline">Next Suspension Date</span>:           
+${future ? future.day : 'No upcoming suspensions.'}
+${future ? future.status : ''}
+${future ? future.reason : ''}
+<span class="underline">Next Two Weeks</span>:
+${fourteenDays.join('\n')}
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+`
 
 }
-
 // ++++++++++++++++++++++++++++++++++++++
 // main scheduled handler
 // ++++++++++++++++++++++++++++++++++++++
