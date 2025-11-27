@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const pre = document.getElementById('terminal');
+  const div = document.getElementById('terminal');
 
-  function typeText(pre, text, delay = 5) {
+  function typeText(div, text, delay = 5) {
     const formatted = text.replace(/\n/g, '\n')
     let i = 0
 
@@ -11,14 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      pre.innerText += formatted[i];
+      div.innerHTML += formatted[i];
       i++;
-      pre.scrollTop = pre.scrollHeight;
+      div.scrollTop = div.scrollHeight;
 
     }, delay);
   }
 
-  function typeLines(pre, text, lineDelay = 30, done) {
+  function typeLines(div, text, lineDelay = 30, done) {
     const lines = text.split('\n');
     let i = 0;
 
@@ -29,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        pre.innerText += lines[i] + '\n';
+        div.innerText += lines[i] + '\n';
         i++;
 
-        pre.scrollTop = pre.scrollHeight;
+        div.scrollTop = div.scrollHeight;
     }, lineDelay);
 
   }
@@ -79,19 +79,19 @@ ASipP is a resource designed and maintained by Drew Dudak for navigating future 
 `;
 
   // functions running
-  typeLines(pre, headerArt, 45, () => {
-    pre.innerText += `Fetching report...\n`;
-    pre.scrollTop = pre.scrollHeight;
+  typeLines(div, headerArt, 45, () => {
+    div.innerHTML += `Fetching report...\n`;
+    div.scrollTop = div.scrollHeight;
 
         setTimeout(() => {
             fetch('/.netlify/functions/report')
                 .then(res => res.text())            
                 .then(text => {
-                    pre.textContent += '\n'
-                    typeText(pre, text, 5);
+                    div.innerHTML += '\n'
+                    typeText(div, text, 5);
                 })
                 .catch(err => {
-                  pre.textContent += '\nError: ' + err.message;
+                  div.textContent += '\nError: ' + err.message;
             });
         }, 2500);
   });

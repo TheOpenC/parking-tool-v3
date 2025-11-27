@@ -15,14 +15,14 @@ export default async function handler(req, context) {
 
     return new Response(reportText, {
         status: 200,
-        headers: { "Content-Type": "text/plain; charset=utf-8" },
+        headers: { "Content-Type": "text/html; charset=utf-8" },
     });
 } catch (err) {
     console.err("Error in report function:", err);
 
     return new Response('Error loading report', {
         status: 500,
-        headers: { "Content-Type": "text/plain; charset = utf-8"},
+        headers: { "Content-Type": "text/plain; charset=utf-8"},
     });
 }
 }
