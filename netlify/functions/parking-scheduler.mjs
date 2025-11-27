@@ -8,6 +8,12 @@ import { getStore } from "@netlify/blobs";
 
 
 //Globals for dates only.
+const nyTime = date.toLocaleString('en-US', {
+    timeZone: 'America/New_York',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+});
 let today = new Date();
 let month = String(today.getMonth()+1).padStart(2, '0'); //MM
 let day = String(today.getDate()).padStart(2, '0'); //DD
@@ -154,7 +160,7 @@ return `
 + + + + + + + + + + + + + + + + + + + +
 
 The ASipP Report.
-<span class="fuchsia">${today.toDateString()} @ ${today.toLocaleTimeString('en-US')}</span>, New York City
+<span class="fuchsia">${today.toDateString()} @ ${nyTime}</span>, New York City
 <span class="underline">Weather</span>: 
 ${current}, ${forecast}
             
