@@ -1,10 +1,5 @@
 import { getStore } from "@netlify/blobs";
 
-// console.log('[scheduler] env check', {
-//   hasOcpKey: !!process.env.OCP_KEY,
-// });
-
-
 // ================================================================
 // ================================================================
 //  HELPER FUNCTIONS (below)
@@ -184,9 +179,6 @@ function buildReport(parkingJSON, weatherJSON) {
 
         `
 
-
-   
-
 }
 
 // ++++++++++++++++++++++++++++++++++++++
@@ -229,63 +221,3 @@ export default async function handler(req, context) {
 export const config = {
     schedule: "@daily", 
 }
-
-
-
-
-
-
-// use this to format all the parking dates
-
-
-
-// OLD XTERM OUTPUT WITH TERMINAL CODES FOR COLORS
-// return `
-// + + + + + + + + + + + + + + + + + + + +
-
-// The ASipP Report.
-// \x1b[38;5;200;1m${today}${close}, New York City
-// \x1b[38;5;15;4mWeather${close}: 
-// ${current}, ${forecast}
-        
-// \x1b[38;5;15;4mToday${close}:
-// \x1b[48;5;3m\x1b[38;5;16;1m${status == "IN EFFECT" ? status : ""}${twoClose}\x1b[48;5;2m\x1b[38;5;15m${status == "NOT IN EFFECT" || status == "SUSPENDED" ? status : ""}${twoClose}
-// ${details} 
-        
-// \x1b[38;5;15;4mTomorrow${close}:
-// ${tomorrowDate}
-// \x1b[48;5;3m\x1b[38;5;16;1m${tomorrowStatus == "IN EFFECT" ? tomorrowStatus : ""}${twoClose}\x1b[48;5;2m\x1b[38;5;15m${tomorrowStatus == "NOT IN EFFECT" || tomorrowStatus == "SUSPENDED" ? tomorrowStatus : ""}${twoClose}
-
-// \x1b[38;5;15;4mNext Suspension Date${close}:           
-// ${future ? future.day : 'No upcoming suspensions'}
-// ${future.status}
-// ${future.reason}
-
-// \x1b[38;5;15;4mNext two weeks${close}:
-// ${fourteenDays}
-
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-// `
-
-
-
-
-
-
-
-
-
-//disclaimer -- can be linked on the website rather than printed. 
-// \x1b[38;5;15;3mDisclaimer: This report is for general information only.
-// Parking rules, suspensions, and posted signs may change at any time, and official street signs always override this report.
-
-// By using this tool, you agree that you are solely responsible for following all parking regulations.
-// You assume all risk for any tickets, fines, or towing.
-// The developer is not liable for errors, delays, or inaccuracies in the data.
-
-// For official information, always check NYC DOT / 311 or the posted signage at your location.\x1b[0m
-
-
-// console.log(combineAPIData())
