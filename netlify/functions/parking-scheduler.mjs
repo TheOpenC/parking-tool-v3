@@ -154,7 +154,7 @@ return `
 + + + + + + + + + + + + + + + + + + + +
 
 The ASipP Report.
-<span class="fuchsia">${today.toDateString()}</span>, New York City
+<span class="fuchsia">${today.toDateString()} @ ${today.toLocaleTimeString('en-US')}</span>, New York City
 <span class="underline">Weather</span>: 
 ${current}, ${forecast}
             
