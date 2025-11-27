@@ -8,12 +8,7 @@ import { getStore } from "@netlify/blobs";
 
 
 //Globals for dates only.
-const nyTime = date.toLocaleString('en-US', {
-    timeZone: 'America/New_York',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric'
-});
+
 let today = new Date();
 let month = String(today.getMonth()+1).padStart(2, '0'); //MM
 let day = String(today.getDate()).padStart(2, '0'); //DD
@@ -26,6 +21,12 @@ let endMonth = String(endDate.getMonth() + 1).padStart(2, '0');
 let endDay = String(endDate.getDate()).padStart(2, '0');
 let endYear = String(endDate.getFullYear()); 
 
+const nyTime = today.toLocaleString('en-US', {
+    timeZone: 'America/New_York',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+});
 
 
 // let parkingUrl = `https://api.nyc.gov/public/api/GetCalendar?fromdate=${month}%2F${day}%2F${year}&todate=${endMonth}%2F${endDay}%2F${endYear}` 
