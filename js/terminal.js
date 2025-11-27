@@ -1,24 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
   const div = document.getElementById('terminal');
 
-  function typeText(div, text, delay = 5) {
+  // -- create header and report cotnainers --
+  const headerDiv = document.createElement('div');
+  const reportDiv = document.createElement('div')
+
+  headerDiv.id = 'headerDiv';
+  reportDiv.id = 'reportDiv';
+
+  terminal.appendChild(headerDiv);
+  terminal.appendChild(reportDiv);
+
+  // By Character animation effect
+  function typeText(target, text, delay = 5) {
     const formatted = text.replace(/\n/g, '\n')
     let i = 0
 
     const intervalId = setInterval(() => {
       if (i >= formatted.length) {
-        clearInterval(intervalId)
+        clearInterval(intervalId);
+        if (typeof done === 'function') done();
         return;
       }
 
-      div.innerHTML += formatted[i];
+      // dynamic -- element's innHTML
+      target.innerHTML += formatted[i];
       i++;
-      div.scrollTop = div.scrollHeight;
-
+      target.scrollTop = target.scrollHeight;
+      terminal.scrollTop = terminal.scrollHeight;
     }, delay);
   }
 
-  function typeLines(div, text, lineDelay = 30, done) {
+  // figure out a way of using a special character to pause the typing momentarily for information headings, ... if char == specialChar {delay 10}. // blink effect would be nice too.
+
+  // By Line animation effect
+  function typeLines(target, text, lineDelay = 30, done) {
     const lines = text.split('\n');
     let i = 0;
 
@@ -29,12 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        div.innerText += lines[i] + '\n';
+        // Dynamic for any element
+        target.innerHTML += lines[i] + '\n';
         i++;
 
-        div.scrollTop = div.scrollHeight;
+        target.scrollTop = target.scrollHeight;
+        terminal.scrollTop = terminal.scrollHeight;
     }, lineDelay);
-
   }
 
    const headerArt =
@@ -79,19 +96,18 @@ ASipP is a resource designed and maintained by Drew Dudak for navigating future 
 `;
 
   // functions running
-  typeLines(div, headerArt, 45, () => {
-    div.innerHTML += `Fetching report...\n`;
-    div.scrollTop = div.scrollHeight;
+  typeLines(headerDiv, headerArt, 45, () => {
+    reportDiv.innerHTML += `\nFetching report...\n`;
 
         setTimeout(() => {
             fetch('/.netlify/functions/report')
                 .then(res => res.text())            
                 .then(text => {
-                    div.innerHTML += '\n'
+                    reportDiv.innerHTML += '\n'
                     typeText(div, text, 5);
                 })
                 .catch(err => {
-                  div.textContent += '\nError: ' + err.message;
+                  reportDiv.textContent += '\nError: ' + err.message;
             });
         }, 2500);
   });
