@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
   }
 
-  // figure out a way of using a special character to pause the typing momentarily for information headings, ... if char == specialChar {delay 10}. // blink effect would be nice too.
+  // figure out a way of using a special character to pause the typing momentarily for information headings, ... if  char == specialChar {delay 10}. // blink effect would be nice too.
 
   // By Line animation effect 
   function typeLines(target, text, lineDelay = 30, done) {
