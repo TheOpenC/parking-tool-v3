@@ -223,5 +223,5 @@ export default async function handler(req, context) {
 
 // tell netlify when to run 
 export const config = {
-    schedule: "@daily", 
+    schedule: "0 */6 * * *", 
 }
