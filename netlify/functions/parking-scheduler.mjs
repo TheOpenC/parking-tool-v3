@@ -187,7 +187,7 @@ ${fourteenDays.join('\n')}
 }
 // ++++++++++++++++++++++++++++++++++++++
 // main scheduled handler
-// ++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++
 export default async function handler(req, context) {
     try {
 
