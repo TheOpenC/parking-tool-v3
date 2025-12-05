@@ -1,4 +1,6 @@
 html, body {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+
   margin: 0;
   padding: 0;
   overflow-x: auto; 
@@ -17,9 +19,9 @@ html, body {
   text-wrap-mode: wrap;
   white-space-collapse: preserve;
 
-  font-family: courier-new, courier, monospace;
-  font-size: 15px;
-  line-height: 16px;
+  /* font-family: courier-new, courier, monospace; */
+  font-size: 18px;
+  line-height: 19px;
   letter-spacing: normal;
   font-kerning: none;
   /* letter-spacing: ; */

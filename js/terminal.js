@@ -1,57 +1,77 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const div = document.getElementById('terminal');
+  const terminalDiv = document.getElementById('terminal');
+  const headerDiv = document.getElementById('headerDiv');
+  const introDiv = document.getElementById('introDiv');
+  const reportDiv = document.getElementById('reportDiv');
+  const dateDiv = document.getElementById('dateDiv');
+  const weatherDiv = document.getElementById('weatherDiv');
+  const todayDiv = document.getElementById('todayDiv');
+  const tomorrowDiv = document.getElementById('tomorrowDiv');
+  const nextSuspensionDiv = document.getElementById('nextSuspensionDiv');
+  const twoWeeksDiv= document.getElementById('twoWeeksDiv');
 
-  // -- create header and report cotnainers --
-  const headerDiv = document.createElement('div');
-  const reportDiv = document.createElement('div')
 
-  headerDiv.id = 'headerDiv';
-  reportDiv.id = 'reportDiv';
 
-  terminal.appendChild(headerDiv);
-  terminal.appendChild(reportDiv);
 
   // By Character animation effect
-  function typeText(target, text, delay = 5) {
-    const formatted = text.replace(/\n/g, '\n')
-    let i = 0
+  function typeChar(targetElement, text, speed, onComplete) {
+    //clear line's content
+    // targetElement.textContent = '';
 
-    const intervalId = setInterval(() => {
-      if (i >= formatted.length) {
-        clearInterval(intervalId);
-        if (typeof done === 'function') done();
+    //character index count
+    let index = 0;
+
+    function step() {
+      if (index < text.length) {
+        const char = text[index];
+
+        //add the next character
+        targetElement.textContent += char;
+
+        index += 1;
+
+        //schedule the next character
+        setTimeout(step, speed);
+      } else {
+        // when its done typing this string
+        if (typeof onComplete === 'function') {
+          onComplete();
+        }
+      }
+    }
+
+    // start typing
+    step();
+      }
+
+
+
+  // By Line animation effect 
+  function typeLines(targetElement, text, charSpeed, linePause, onComplete) {
+    // split text into individual lines using \n
+    const lines = text.split('\n');
+    let lineIndex = 0; // which line we're on
+    
+    function typeNextLine() {
+      // if we've done all lines, run onComplete if provided
+      if (lineIndex >= lines.length) {
+        if (typeof onComplete === 'function') {
+          onComplete();
+        }
         return;
       }
 
-      // dynamic -- element's innHTML
-      target.innerHTML += formatted[i];
-      i++;
-      target.scrollTop = target.scrollHeight;
-      terminal.scrollTop = terminal.scrollHeight;
-    }, delay);
-  }
+      const line = lines[lineIndex];
 
-  // figure out a way of using a special character to pause the typing momentarily for information headings, ... if  char == specialChar {delay 10}. // blink effect would be nice too.
+      typeChar(targetElement, line + '\n', charSpeed, () => {
+        lineIndex += 1;
+        // small pause between lines if I decide I like that effect.
+        setTimeout(typeNextLine, linePause);
+      });
+    }
 
-  // By Line animation effect 
-  function typeLines(target, text, lineDelay = 30, done) {
-    const lines = text.split('\n');
-    let i = 0;
-
-    const intervalId = setInterval(() => {
-      if (i >= lines.length) {
-            clearInterval(intervalId);
-            if (typeof done === 'function') done();
-            return;
-        }
-
-        // Dynamic for any element
-        target.innerHTML += lines[i] + '\n';
-        i++;
-
-        target.scrollTop = target.scrollHeight;
-        terminal.scrollTop = terminal.scrollHeight;
-    }, lineDelay);
+    // start with the first line
+    typeNextLine();
   }
 
    const headerArt =
@@ -59,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-         ⠀⠀⠀⠀⠀⣀⡤⢄⡀
+   ⠀⠀⠀⠀⠀      ⣀⡤⢄⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠶⠦⡞⢳⣶⡄⠙⡄⣀⣀⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⡏⠀⣠⣤⣹⡜⠛⠁⣠⠗⠛⠉⠙⢳⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠳⣄⣘⣟⠿⠋⠉⠉⠀⠀⠀⠀⢈⣿⡇
@@ -87,31 +107,32 @@ Alternate Side preParking report
 ██╔══██║╚════██║██║██╔═══╝ ██╔═══╝
 ██║  ██║███████║██║██║     ██║
 ╚═╝  ╚═╝╚══════╝╚═╝╚═╝     ╚═╝
+`
 
+const headerTitle = `
 Alternate Side preParking report
 DREWD (2025)
 (ASipP)
+`;
 
+const headerIntro = `
 ASipP is a resource designed and maintained by Drew Dudak for navigating future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, two week summary and upcoming suspensions with the intent on providing users information for pre-parking to hit consecutive, multi-week ASP suspensions. ASipP gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. It does include the weather for the next 6 hours 'cus why not?
 `;
 
   // functions running
-  typeLines(headerDiv, headerArt, 45, () => {
-    reportDiv.innerHTML += `\nFetching report...\n`;
+  typeLines(headerDiv, headerArt, 2, 10, () => {
 
+    setTimeout(() => {
+      typeLines(headerDiv, headerTitle, 4, 200, () => {
         setTimeout(() => {
-            fetch('/.netlify/functions/report')
-                .then(res => res.text())            
-                .then(text => {
-                    reportDiv.innerHTML += '\n'
-                    typeText(div, text, 5);
-                })
-                .catch(err => {
-                  reportDiv.textContent += '\nError: ' + err.message;
-            });
-        }, 2500);
-  });
+          typeChar(introDiv, headerIntro, 5);
+        }, 400)
+      });
+    }, 400)
+    
+  })
 
+  // initial add event listener
 })
 
 
