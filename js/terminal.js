@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lines = text.split('\n');
     let lineIndex = 0; // which line we're on
     
-    function typeNextLine() {
+    function showNextLine() {
       // if we've done all lines, run onComplete if provided
       if (lineIndex >= lines.length) {
         if (typeof onComplete === 'function') {
@@ -63,15 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const line = lines[lineIndex];
 
-      typeChar(targetElement, line + '\n', charSpeed, () => {
-        lineIndex += 1;
-        // small pause between lines if I decide I like that effect.
-        setTimeout(typeNextLine, linePause);
-      });
+      // append this whole line + newline
+      targetElement.textContent += line + '\n';
+
+      lineIndex += 1;
+
+      // wait before showing the next line
+      setTimeout(showNextLine, linePause);
     }
 
     // start with the first line
-    typeNextLine();
+    showNextLine();
   }
 
    const headerArt =
@@ -120,7 +122,7 @@ ASipP is a resource designed and maintained by Drew Dudak for navigating future 
 `;
 
   // functions running
-  typeLines(headerDiv, headerArt, 2, 10, () => {
+  typeLines(headerDiv, headerArt, 30, 150, () => {
 
     setTimeout(() => {
       typeLines(headerDiv, headerTitle, 4, 200, () => {
