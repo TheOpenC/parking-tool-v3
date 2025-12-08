@@ -139,7 +139,7 @@ function colorStatus(status) {
         if (status === "IN EFFECT") {
             return `<span class="black hRed">${status}</span>`
         } 
-        if (status === "NOT IN EFFECT" || status === "SUSPENDED"){
+        if (status === " NOT IN EFFECT " || status === " SUSPENDED "){
             return `<span class="black hLime">${status}</span>`
         } 
         return status;
