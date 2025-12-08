@@ -146,7 +146,7 @@ function fetchAndShowReport() {
       typeLines(headerDiv, headerTitle, 4, 125, () => {
         // after title finishes
         setTimeout(() => {
-          typeChar(introDiv, headerIntro, 5, () => {
+          typeChar(introDiv, headerIntro, 2, () => {
             setTimeout(() => {
               typeChar(loadingAnimation, fetchingReport, 15, () => {
                 function typeDot(count) {
