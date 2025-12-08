@@ -13,7 +13,7 @@ html, body {
   padding: 10px;
   /* overflow-x: hidden; */
   
-  white-space: pre; /* wrap long text without breaking  d formatting */
+  white-space: pre; /* wrap long text without breaking  d fformatting */
   overflow-wrap: anywhere;
   word-break: break-all;
   text-wrap-mode: wrap;
