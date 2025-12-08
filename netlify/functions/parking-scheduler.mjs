@@ -137,10 +137,10 @@ function formatWeather(weatherJSON) {
     
 function colorStatus(status) {
         if (status === "IN EFFECT") {
-            return `<span class="black hYellow">${status}</span>`
+            return `<span class="white hYellow">${status}</span>`
         } 
         if (status === "NOT IN EFFECT" || status === "SUSPENDED"){
-            return `<span class="black hGreen">${status}</span>`
+            return `<span class="white hGreen">${status}</span>`
         } 
         return status;
 }
