@@ -176,7 +176,7 @@ ${colorStatus(tomorrowStatus)}
 
 <span class="underline">Next Suspension Date</span>:           
 ${future ? future.day : 'No upcoming suspensions.'}
-${future ? future.status : ''}
+${future ? colorStatus(future.status) : ''}
 ${future ? future.reason : ''}
 
 <span class="underline">Next Two Weeks</span>:
