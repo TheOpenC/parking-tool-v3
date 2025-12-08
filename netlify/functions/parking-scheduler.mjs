@@ -137,10 +137,10 @@ function formatWeather(weatherJSON) {
     
 function colorStatus(status) {
         if (status === "IN EFFECT") {
-            return `<span class="white hYellow">${status}</span>`
+            return `<span class="black hRed">${status}</span>`
         } 
         if (status === "NOT IN EFFECT" || status === "SUSPENDED"){
-            return `<span class="white hGreen">${status}</span>`
+            return `<span class="black hLime">${status}</span>`
         } 
         return status;
 }
@@ -162,6 +162,7 @@ return `
 
 The ASipP Report.
 <span class="black hWhite">${today.toDateString()} @ ${nyTime}</span>, New York City
+
 <span class="underline">Weather</span>: 
 ${current}, ${forecast}
             
