@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const headerDiv = document.getElementById('headerDiv');
   const introDiv = document.getElementById('introDiv');
   const reportDiv = document.getElementById('reportDiv');
+  const loadingAnimation = document.getElementById('loadingAnimation')
   const dateDiv = document.getElementById('dateDiv');
   const weatherDiv = document.getElementById('weatherDiv');
   const todayDiv = document.getElementById('todayDiv');
@@ -121,13 +122,50 @@ const headerIntro = `
 ASipP is a resource designed and maintained by Drew Dudak for navigating future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, two week summary and upcoming suspensions with the intent on providing users information for pre-parking to hit consecutive, multi-week ASP suspensions. ASipP gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. It does include the weather for the next 6 hours 'cus why not?
 `;
 
-  // functions running
-  typeLines(headerDiv, headerArt, 30, 150, () => {
+const fetchingReport = `
+Fetching report `;
 
+function fetchAndShowReport() {
+  const REPORT_URL = '/.netlify/functions/report'
+
+  fetch(REPORT_URL)
+    .then((response) => response.text())
+    .then((html) => {
+      reportDiv.innerHTML = html;
+    })
+    .catch((error) => {
+      console.error('Error fetching report:', error);
+      reportDiv.textContent = 'Error loading report.'
+    })
+}
+
+  // functions running
+  typeLines(headerDiv, headerArt, 20, 125, () => {
+    // after art finishes
     setTimeout(() => {
-      typeLines(headerDiv, headerTitle, 4, 200, () => {
+      typeLines(headerDiv, headerTitle, 4, 125, () => {
+        // after title finishes
         setTimeout(() => {
-          typeChar(introDiv, headerIntro, 5);
+          typeChar(introDiv, headerIntro, 5, () => {
+            setTimeout(() => {
+              typeChar(loadingAnimation, fetchingReport, 15, () => {
+                function typeDot(count) {
+                  if (count === 0) return; // stop after N dots
+
+                  // add one dot slowly
+                  typeChar(loadingAnimation, '.', 500, () => {
+                    // when that dot is done, call typeDot again with one less
+                    typeDot(count - 1);
+                  });
+                  fetchAndShowReport();
+                }
+
+                typeDot(5);
+              });
+            }, 500);
+          })
+          // this runs after the intro paragraph finishes typing
+          // Fetching report ...
         }, 400)
       });
     }, 400)
