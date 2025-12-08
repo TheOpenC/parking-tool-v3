@@ -140,7 +140,7 @@ function fetchAndShowReport() {
 }
 
   // functions running
-  typeLines(headerDiv, headerArt, 20, 125, () => {
+  typeLines(headerDiv, headerArt, 20, 75, () => {
     // after art finishes
     setTimeout(() => {
       typeLines(headerDiv, headerTitle, 4, 125, () => {
@@ -166,9 +166,9 @@ function fetchAndShowReport() {
           })
           // this runs after the intro paragraph finishes typing
           // Fetching report ...
-        }, 400)
+        }, 300)
       });
-    }, 400)
+    }, 300)
     
   })
 

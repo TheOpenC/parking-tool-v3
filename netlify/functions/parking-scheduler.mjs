@@ -161,7 +161,7 @@ return `
 + + + + + + + + + + + + + + + + + + + +
 
 The ASipP Report.
-<span class="fuchsia">${today.toDateString()} @ ${nyTime}</span>, New York City
+<span class="black hWhite">${today.toDateString()} @ ${nyTime}</span>, New York City
 <span class="underline">Weather</span>: 
 ${current}, ${forecast}
             
