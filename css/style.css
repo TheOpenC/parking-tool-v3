@@ -48,6 +48,15 @@ html, body {
     height: 90vh;
   }
 } 
+@media(max-width: 500px){
+  #terminal{
+    width: 100%;
+    margin: 0;
+  }
+  html {
+     
+  }
+} 
 
 /*  Span colors + styling  */
 
