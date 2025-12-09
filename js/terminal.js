@@ -118,8 +118,10 @@ DREWD (2025)
 (ASipP)
 `;
 
+const gitHub = `<a href="https://github.com/TheOpenC/parking-tool-v3">GitHub</a>`
+
 const headerIntro = `
-ASipP is a resource designed and maintained by Drew Dudak for navigating future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, two week summary and upcoming suspensions with the intent on providing users information for pre-parking to hit consecutive, multi-week ASP suspensions. ASipP gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. It does include the weather for the next 6 hours 'cus why not?
+ASipP is a resource designed and maintained by Drew Dudak to help navigate future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, a two-week summary, and upcoming suspensions with the intent of providing users with information for pre-parking to identify situations that allow for consecutive, multi-week ASP suspension parking spots. ASipP updates its report every 6 hours with Cron jobs in the form of Netlify scheduled functions. These frequent updates account for sudden changes in parking information caused by weather or current events and provide additional current weather information for the NYC area. The report gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. 
 `;
 
 const fetchingReport = `
