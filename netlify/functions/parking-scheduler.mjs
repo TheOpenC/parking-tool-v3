@@ -10,7 +10,7 @@ import { getStore } from "@netlify/blobs";
 //Globals for dates only.
 const now = new Date();
 const nyNow = new Date(
-    now.toLocaleDateString('en-US', { timeZone: 'America/New_York'})
+    now.toLocaleString('en-US', { timeZone: 'America/New_York'})
 );
 
 let today = nyNow;
