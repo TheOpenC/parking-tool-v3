@@ -9,14 +9,19 @@ import { getStore } from "@netlify/blobs";
 
 //Globals for dates only.
 const now = new Date();
-const nyNow = new Date(
-    now.toLocaleString('en-US', { timeZone: 'America/New_York'})
-);
+const nyDateString = now.toLocaleString('en-US', { 
+    timeZone: 'America/New_York',
+});
 
-let today = nyNow;
-let month = String(today.getMonth()+1).padStart(2, '0'); //MM
-let day = String(today.getDate()).padStart(2, '0'); //DD
-let year = String(today.getFullYear()); //YYYY
+const [mm, dd, yyyy] = nyDateString.split('/');
+
+
+let month = mm.padStart(2, '0'); //MM
+let day = dd.padStart(2, '0'); //DD
+let year = yyyy; //YYYY
+
+let today = new Date(Number(year), Number(month) - 1, Number(day));
+
 
 let endDate = new Date(today);
 endDate.setDate(endDate.getDate() + 60);
