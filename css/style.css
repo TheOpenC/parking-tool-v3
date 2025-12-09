@@ -45,8 +45,6 @@ html, body {
 
 }
 
-
-
 @media(max-width: 700px){
   #terminal{
     white-space: pre-wrap;
@@ -112,31 +110,3 @@ html, body {
 
 
 
-/* OLD XTERM STYLING */
-/* #terminal {
-  width: 85%;
-  height: 800px;
-  margin: 4rem auto;
-  padding: 10px;
-
-  overflow: hidden;
-  background: black;
-  filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
-  
-} */
-
-/* .xterm-screen{
-    width: 85%;
-    height: 1000px;
-}
-#terminal .xterm {
-  height: 100% !important;
-}
-
-/* this is the internal scrolling area – turn off its scrollbars */
-/* #terminal .xterm-viewport {
-  overflow-y: hidden !important;
-  overflow-x: hidden !important;
-  height: 100% !important;
-}
-*/ 
