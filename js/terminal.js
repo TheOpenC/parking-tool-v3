@@ -140,13 +140,13 @@ function fetchAndShowReport() {
 }
 
   // functions running
-  typeLines(headerDiv, headerArt, 20, 75, () => {
+  typeLines(headerDiv, headerArt, 20, 40, () => {
     // after art finishes
     setTimeout(() => {
       typeLines(headerDiv, headerTitle, 4, 125, () => {
         // after title finishes
         setTimeout(() => {
-          typeChar(introDiv, headerIntro, 2, () => {
+          typeChar(introDiv, headerIntro, 1, () => {
             setTimeout(() => {
               typeChar(loadingAnimation, fetchingReport, 15, () => {
                 function typeDot(count) {
