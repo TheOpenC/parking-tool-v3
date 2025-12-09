@@ -9,15 +9,19 @@ import { getStore } from "@netlify/blobs";
 
 //Globals for dates only.
 const now = new Date();
-const nyDateString = now.toLocaleString('en-US', { 
+
+const nyDateForApi = now.toLocaleDateString('en-US', { 
     timeZone: 'America/New_York',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
 });
 
-const [mm, dd, yyyy] = nyDateString.split('/');
+const [mm, dd, yyyy] = nyDateForApi.split('/');
 
 
-let month = mm.padStart(2, '0'); //MM
-let day = dd.padStart(2, '0'); //DD
+let month = mm; //MM
+let day = dd; //DD
 let year = yyyy; //YYYY
 
 let today = new Date(Number(year), Number(month) - 1, Number(day));
@@ -26,11 +30,11 @@ let today = new Date(Number(year), Number(month) - 1, Number(day));
 let endDate = new Date(today);
 endDate.setDate(endDate.getDate() + 60);
 
-let endMonth = String(endDate.getMonth() + 1).padStart(2, '0');
-let endDay = String(endDate.getDate()).padStart(2, '0');
-let endYear = String(endDate.getFullYear()); 
+let endMonth    = String(endDate.getMonth() + 1).padStart(2, '0');
+let endDay      = String(endDate.getDate()).padStart(2, '0');
+let endYear     = String(endDate.getFullYear()); 
 
-const nyDate = today.toLocaleDateString('en-US', {
+const nyDate = now.toLocaleDateString('en-US', {
     timeZone: 'America/New_York',
     weekday: 'short',
     year: 'numeric',
@@ -38,7 +42,7 @@ const nyDate = today.toLocaleDateString('en-US', {
     day: '2-digit',
 });
 
-const nyTime = today.toLocaleTimeString('en-US', {
+const nyTime = now.toLocaleTimeString('en-US', {
     timeZone: 'America/New_York',
     hour: 'numeric',
     minute: '2-digit',
