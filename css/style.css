@@ -37,6 +37,14 @@ html, body {
   line-height: 17px;
 }
 
+#introDiv,
+#headerDiv {
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+  
+}
+
 
 
 @media(max-width: 700px){
