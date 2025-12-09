@@ -38,11 +38,11 @@ html, body {
 }
 
 #introDiv,
-#headerDiv {
+#reportDiv {
   word-break: normal;
   overflow-wrap: break-word;
   text-wrap: pretty;
-  
+
 }
 
 
