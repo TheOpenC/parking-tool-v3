@@ -50,7 +50,7 @@ html, body {
 } 
 @media(max-width: 500px){
   #terminal{
-    width: 100%;
+    width: 95%;
     margin: 0;
   }
   html {
