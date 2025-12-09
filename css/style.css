@@ -29,7 +29,7 @@ html, body {
 
   background: #111;
   color: white;
-  margin: 4rem auto;
+  margin: 2rem auto;
   filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
 }
 #headerDiv{
