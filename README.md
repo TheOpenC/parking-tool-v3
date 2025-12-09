@@ -1,1 +1,7 @@
 ASipP is a resource designed and maintained by Drew Dudak to help navigate future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, a two-week summary, and upcoming suspensions with the intent of providing users with information for pre-parking to identify situations that allow for consecutive, multi-week ASP suspension parking spots. ASipP updates its report every 6 hours with cron jobs in the form of Netlify scheduled functions to account for sudden changes in parking information caused by weather or current events. The report gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events.
+
+***********************************************************************************************
+Disclaimer: This report is for general information only.
+
+Parking rules, suspensions, and posted signs may change at any time, and official street signs always override this report. By using this tool, you agree that you are solely responsible for following all parking regulations. You assume all risk for any tickets, fines, or towing.
+The developer is not liable for errors, delays, or inaccuracies in the data. For official information, always check NYC DOT / 311 or the posted signage at your location.

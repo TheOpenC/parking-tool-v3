@@ -8,8 +8,12 @@ import { getStore } from "@netlify/blobs";
 
 
 //Globals for dates only.
+const now = new Date();
+const nyNow = new Date(
+    now.toLocaleDateString('en-US', { timeZone: 'America/New_York'})
+);
 
-let today = new Date();
+let today = nyNow;
 let month = String(today.getMonth()+1).padStart(2, '0'); //MM
 let day = String(today.getDate()).padStart(2, '0'); //DD
 let year = String(today.getFullYear()); //YYYY
@@ -21,11 +25,18 @@ let endMonth = String(endDate.getMonth() + 1).padStart(2, '0');
 let endDay = String(endDate.getDate()).padStart(2, '0');
 let endYear = String(endDate.getFullYear()); 
 
-const nyTime = today.toLocaleString('en-US', {
+const nyDate = today.toLocaleDateString('en-US', {
+    timeZone: 'America/New_York',
+    weekday: 'short',
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+});
+
+const nyTime = today.toLocaleTimeString('en-US', {
     timeZone: 'America/New_York',
     hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric'
+    minute: '2-digit',
 });
 
 
@@ -161,7 +172,7 @@ return `
 + + + + + + + + + + + + + + + + + + + +
 
 The ASipP Report.
-<span class="black hWhite">${today.toDateString()} @ ${nyTime}</span>, New York City
+<span class="black hWhite">${nyDate} @ ${nyTime}</span>, New York City
 
 <span class="underline">Weather</span>: 
 ${current}, ${forecast}
