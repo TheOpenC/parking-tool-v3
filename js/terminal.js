@@ -120,9 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
 ⠀⣠⡶⢋⡄⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠚⣿⠍⢀⣀⠉:
 ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ :
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-Alternate Side preParking report
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
  █████╗ ███████╗██╗██████╗ ██████╗
 ██╔══██╗██╔════╝██║██╔══██╗██╔══██╗
@@ -133,7 +130,7 @@ Alternate Side preParking report
 `
 
 const headerTitle = `
-Alternate Side preParking report
+Alternate Side preParking Report
 DREWD (2025)
 (ASipP)
 `;

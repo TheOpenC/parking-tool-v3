@@ -1,5 +1,14 @@
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/assets/IBMPlexMono-Regular.ttf");
+}
+
+
 html, body {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: 
+  ui-monospace, 
+  "SF Mono",
+  "IBM Plex Mono";
 
   margin: 0;
   padding: 0;
