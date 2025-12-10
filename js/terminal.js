@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function keepBottom() {
       const doc = document.documentElement;
+      const body = document.body;
+
+      const fullHeight = Math.max(
+        doc.scrollHeight,
+        body.scrollheight
+      );
+      
       // wait til the page is taller than the viewport (ie has data filling the page.)
       if (doc.scrollHeight > window.clientHeight) {
         window.scrollTo(0, doc.scrollHeight);
