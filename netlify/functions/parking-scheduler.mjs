@@ -244,5 +244,5 @@ export default async function handler(req, context) {
 
 // tell netlify when to run (every 6 hours, 4 times a day. 1am, 7am, 1pm, 7pm)
 export const config = {
-    schedule: "0 0,4,8,12,16,20 * * *", 
+    schedule: "0 1,5,9,13,17,21 * * *", 
 }
