@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //add the next character
         targetElement.textContent += char;
+        terminalDiv.scrollTop = terminalDiv.scrollHeight;
 
         index += 1;
 
@@ -66,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // append this whole line + newline
       targetElement.textContent += line + '\n';
+      terminalDiv.scrollTop = terminalDiv.scrollHeight;
 
       lineIndex += 1;
 
