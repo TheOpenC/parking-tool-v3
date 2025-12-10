@@ -6,12 +6,16 @@ html, body {
   overflow-x: auto; 
 }
 
+
+
 .report-output{
   width: 85%;
-  max-height: 90vh;      /* prevents full-page blowout */
-  overflow-y: auto;
   padding: 10px;
-  /* overflow-x: hidden; */
+  overflow-y: visible;
+  background: #F7F3E7;
+  color: #322A23;
+  margin: 2rem auto;
+  filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
   
   /* white-space: pre;  wrap long text without breaking  d fformatting */
   overflow-wrap: anywhere;
@@ -19,18 +23,13 @@ html, body {
   text-wrap-mode: wrap;
   white-space-collapse: preserve;
 
-  /* font-family: courier-new, courier, monospace; */
   font-size: 18px;
   line-height: 20px;
   letter-spacing: normal;
   font-kerning: none;
-  /* letter-spacing: ; */
   font-weight: 400;
 
-  background: #F7F3E7;
-  color: #322A23;
-  margin: 2rem auto;
-  filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
+
 }
 #headerDiv{
   font-size: 16px;
@@ -55,18 +54,10 @@ html, body {
   }
 } 
 @media(max-width: 500px){
-  #terminal{
-    width: 95%;
-    margin: 0 auto;
-  }
   .report-output {
-    margin: 0;
-    max-height: 100vh;
+    margin: 0rem;
   }
-  html {
-    background: #F7F3E7;
-;
-  }
+  
 } 
 
 /*  Span colors + styling  */
