@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         doc.scrollHeight,
         body.scrollheight
       );
-      
+
       // wait til the page is taller than the viewport (ie has data filling the page.)
       if (doc.scrollHeight > window.clientHeight) {
         window.scrollTo(0, doc.scrollHeight);
@@ -141,7 +141,7 @@ DREWD (2025)
 const gitHub = `<a href="https://github.com/TheOpenC/parking-tool-v3">GitHub</a>`
 
 const headerIntro = `
-ASipP is a resource designed and maintained by Drew Dudak to help navigate future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, a two-week summary, and upcoming suspensions. ASipP updates its report every 6 hours to account for weather and current events. The report gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. 
+ASipP is a resource designed and maintained by Drew Dudak to help navigate future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, a two-week summary, and upcoming suspensions. ASipP updates its report every 4 hours to account for weather and current events. The report gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. 
 `;
 
 const fetchingReport = `
