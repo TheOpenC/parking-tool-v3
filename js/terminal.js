@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const twoWeeksDiv= document.getElementById('twoWeeksDiv');
 
 
+  function keepBottom() {
+      const doc = document.documentElement;
+      // wait til the page is taller than the viewport (ie has data filling the page.)
+      if (doc.scrollHeight > window.clientHeight) {
+        window.scrollTo(0, doc.scrollHeight);
+      }
+    }
+
 
 
   // By Character animation effect
@@ -28,9 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //add the next character
         targetElement.textContent += char;
-        terminalDiv.scrollTop = terminalDiv.scrollHeight;
-
         index += 1;
+
+        // Keep newest content in view once data has filled the container.
+        keepBottom();
 
         //schedule the next character
         setTimeout(step, speed);
@@ -41,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-
     // start typing
     step();
       }
@@ -67,7 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // append this whole line + newline
       targetElement.textContent += line + '\n';
-      terminalDiv.scrollTop = terminalDiv.scrollHeight;
+      
+      // keep newest content in view 
+      keepBottom()
 
       lineIndex += 1;
 
@@ -77,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // start with the first line
     showNextLine();
+    
   }
 
    const headerArt =
