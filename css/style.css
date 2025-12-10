@@ -8,12 +8,12 @@ html, body {
 
 .report-output{
   width: 85%;
-  max-height: 80vh;      /* prevents full-page blowout */
+  max-height: 90vh;      /* prevents full-page blowout */
   overflow-y: auto;
   padding: 10px;
   /* overflow-x: hidden; */
   
-  white-space: pre; /* wrap long text without breaking  d fformatting */
+  /* white-space: pre;  wrap long text without breaking  d fformatting */
   overflow-wrap: anywhere;
   word-break: break-all;
   text-wrap-mode: wrap;
@@ -29,7 +29,7 @@ html, body {
 
   background: #F7F3E7;
   color: #322A23;
-  margin: 2rem auto 4rem auto;
+  margin: 2rem auto;
   filter: drop-shadow(0px 25px 20px rgb(173, 173, 173));
 }
 #headerDiv{
@@ -51,13 +51,17 @@ html, body {
     overflow-wrap: anywhere;
     word-break: break-all;
     width: 85%;
-    height: 90vh;
+    height: auto;
   }
 } 
 @media(max-width: 500px){
   #terminal{
     width: 95%;
     margin: 0 auto;
+  }
+  .report-output {
+    margin: 0;
+    max-height: 100vh;
   }
   html {
     background: #F7F3E7;
