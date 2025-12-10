@@ -3,7 +3,8 @@ html, body {
 
   margin: 0;
   padding: 0;
-  overflow-x: auto; 
+  overflow-x: hidden;
+  min-height: 100vh; 
 
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -12,8 +13,10 @@ html, body {
 
 
 .report-output{
-  width: 85%;
-  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 900px;
+  padding: 15px;
   overflow-y: visible;
   background: #F7F3E7;
   color: #322A23;
@@ -58,7 +61,7 @@ html, body {
 } 
 @media(max-width: 500px){
   .report-output {
-    
+    max-width: 100%;
     margin: 0rem;
   }
   
