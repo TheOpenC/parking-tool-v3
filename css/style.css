@@ -18,7 +18,7 @@ html, body {
   background: #F7F3E7;
   color: #322A23;
   margin: 2rem auto 4rem auto;
-  filter: drop-shadow(0px 15px 20px rgb(173, 173, 173));
+  /* filter: drop-shadow(0px 15px 20px rgb(173, 173, 173)); */
   
   /* white-space: pre;  wrap long text without breaking  d fformatting */
   overflow-wrap: anywhere;
