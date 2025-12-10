@@ -52,13 +52,13 @@ html, body {
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     word-break: break-all;
-    width: 85%;
+    width: 100%;
     height: auto;
   }
 } 
 @media(max-width: 500px){
   .report-output {
-    width: 100%;
+    
     margin: 0rem;
   }
   
