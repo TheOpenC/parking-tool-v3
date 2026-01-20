@@ -19,6 +19,14 @@ html, body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+h1, h2, h3, p, pre {
+  margin: 0;
+}
+
+/* add back controlled spacing */
+#terminal h1, #terminal h2, #terminal h3 { margin-bottom: 12px; }
+#terminal p { margin-top: 12px; }
+#terminal pre { margin-top: 12px; }
 
 
 
