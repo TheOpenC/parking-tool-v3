@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const terminalDiv = document.getElementById('terminal');
   const headerDiv = document.getElementById('headerDiv');
-  const introDiv = document.getElementById('introDiv');
+  const projectDiv = document.getElementById('projectDiv');
   const reportDiv = document.getElementById('reportDiv');
   const loadingAnimation = document.getElementById('loadingAnimation')
   const dateDiv = document.getElementById('dateDiv');
@@ -143,7 +143,7 @@ DREWD (2025)
 
 const gitHub = `<a href="https://github.com/TheOpenC/parking-tool-v3">GitHub</a>`
 
-const headerIntro = `
+const projectDescription = `
 ASipP is a resource designed and maintained by Drew Dudak to help navigate future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, a two-week summary, and upcoming suspensions. ASipP updates its report every 4 hours to account for weather and current events. The report gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. 
 `;
 
@@ -153,52 +153,95 @@ Fetching report `;
 function fetchAndShowReport() {
   const REPORT_URL = '/.netlify/functions/report'
 
-  fetch(REPORT_URL)
+  // Adding return. Original did not have Return
+
+  return fetch(REPORT_URL)
     .then((response) => response.text())
     .then((html) => {
       reportDiv.innerHTML = html;
     })
     .catch((error) => {
       console.error('Error fetching report:', error);
-      reportDiv.textContent = 'Error loading report.'
-    })
+      reportDiv.textContent = 'Error loading report.';
+    });
 }
 
-  // functions running
+  // NEW VERSION
   typeLines(headerDiv, headerArt, 20, 40, () => {
-    // after art finishes
     setTimeout(() => {
       typeLines(headerDiv, headerTitle, 4, 125, () => {
-        // after title finishes
         setTimeout(() => {
-          typeChar(introDiv, headerIntro, 1, () => {
+          typeChar(loadingAnimation, fetchingReport, 15, () => {
+          function typeDot(count) {
+            if (count === 0) return;
+
+            typeChar(loadingAnimation, '.', 500, () => {
+              typeDot(count - 1);
+            });
+            typeDot(5);
+            
+          }
+          fetchAndShowReport().then(() => {
+            loadingAnimation.textContent = '';
+          });
+          
             setTimeout(() => {
-              typeChar(loadingAnimation, fetchingReport, 15, () => {
-                function typeDot(count) {
-                  if (count === 0) return; // stop after N dots
-
-                  // add one dot slowly
-                  typeChar(loadingAnimation, '.', 500, () => {
-                    // when that dot is done, call typeDot again with one less
-                    typeDot(count - 1);
-                  });
-                  fetchAndShowReport();
-                }
-
-                typeDot(5);
-              });
-            }, 500);
-          })
-          // this runs after the intro paragraph finishes typing
-          // Fetching report ...
-        }, 300)
-      });
+              // type the description at the bottom
+              typeChar(projectDiv, projectDescription, 1);
+            }, 300)
+          }, 300)
+        })
+      }, 300)  
     }, 300)
-    
   })
 
-  // initial add event listener
-})
+  
+
+    
+
+   
+  });
+   
+
+  // // initial add event listener
+//})
+
+
+
+  // functions running OLD VERSION
+  // typeLines(headerDiv, headerArt, 20, 40, () => {
+  //   // after art finishes
+  //   setTimeout(() => {
+  //     typeLines(headerDiv, headerTitle, 4, 125, () => {
+  //       // after title finishes
+  //       setTimeout(() => {
+  //         typeChar(projectDiv, projectDescription, 1, () => {
+  //           setTimeout(() => {
+  //             typeChar(loadingAnimation, fetchingReport, 15, () => {
+  //               function typeDot(count) {
+  //                 if (count === 0) return; // stop after N dots
+
+  //                 // add one dot slowly
+  //                 typeChar(loadingAnimation, '.', 500, () => {
+  //                   // when that dot is done, call typeDot again with one less
+  //                   typeDot(count - 1);
+  //                 });
+  //                 fetchAndShowReport();
+  //               }
+
+  //               typeDot(5);
+  //             });
+  //           }, 500);
+  //         })
+  //         // this runs after the intro paragraph finishes typing
+  //         // Fetching report ...
+  //       }, 300)
+  //     });
+  //   }, 300)
+    
+  // })
+
+
 
 
 

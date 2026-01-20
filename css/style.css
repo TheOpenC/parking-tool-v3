@@ -52,7 +52,7 @@ html, body {
   line-height: 17px;
 }
 
-#introDiv,
+#projectDiv,
 #reportDiv {
   word-break: normal;
   overflow-wrap: break-word;
