@@ -172,27 +172,31 @@ function fetchAndShowReport() {
       typeLines(headerDiv, headerTitle, 4, 125, () => {
         setTimeout(() => {
           typeChar(loadingAnimation, fetchingReport, 15, () => {
-          function typeDot(count) {
-            if (count === 0) return;
+            
+            function typeDot(count) {
+              if (count === 0) return;
 
-            typeChar(loadingAnimation, '.', 500, () => {
-              typeDot(count - 1);
-            });  
-          }
-          // Gimme 5 dots
-          typeDot(5);
-
-          fetchAndShowReport().then(() => {
-            loadingAnimation.textContent = '';
-          });
-          
+              typeChar(loadingAnimation, '.', 500, () => {
+                typeDot(count - 1);
+              });  
+            }
+            // Gimme 5 dots
+            typeDot(5);
             setTimeout(() => {
-              // type the description at the bottom
-              typeChar(projectDiv, projectDescription, 1);
-            }, 2000)
-          }, 300)
-        })
-      }, 300)  
+
+              fetchAndShowReport().then(() => {
+                loadingAnimation.textContent = '';
+              });
+          
+              setTimeout(() => {
+                // type the description at the bottom
+                typeChar(projectDiv, projectDescription, 1);
+              }, 2000)
+
+            }, 2200)
+          })
+        }, 500)
+      })  
     }, 300)
   })
 
