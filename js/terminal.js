@@ -181,7 +181,7 @@ function fetchAndShowReport() {
               });  
             }
             // Gimme 5 dots
-            typeDot(5);
+            typeDot(3);
             setTimeout(() => {
 
               fetchAndShowReport().then(() => {
@@ -193,7 +193,7 @@ function fetchAndShowReport() {
                 typeChar(projectDiv, projectDescription, 1);
               }, 2000)
 
-            }, 2200)
+            }, 1500)
           })
         }, 500)
       })  
