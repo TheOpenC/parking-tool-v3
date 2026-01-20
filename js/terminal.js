@@ -177,10 +177,11 @@ function fetchAndShowReport() {
 
             typeChar(loadingAnimation, '.', 500, () => {
               typeDot(count - 1);
-            });
-            typeDot(5);
-            
+            });  
           }
+          // Gimme 5 dots
+          typeDot(5);
+
           fetchAndShowReport().then(() => {
             loadingAnimation.textContent = '';
           });
@@ -188,16 +189,12 @@ function fetchAndShowReport() {
             setTimeout(() => {
               // type the description at the bottom
               typeChar(projectDiv, projectDescription, 1);
-            }, 300)
+            }, 2000)
           }, 300)
         })
       }, 300)  
     }, 300)
   })
-
-  
-
-    
 
    
   });
