@@ -153,7 +153,7 @@ Fetching report `;
 function fetchAndShowReport() {
   const REPORT_URL = '/.netlify/functions/report'
 
-  // Adding return. Original did not have Returnn
+  // Adding return. Original did not have Returnnn
 
   return fetch(REPORT_URL)
     .then((response) => response.text())
