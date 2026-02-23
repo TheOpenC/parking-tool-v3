@@ -164,7 +164,7 @@ ASipP is a resource designed and maintained by Drew Dudak to help navigate futur
 
 This site is best utilized on mobile by adding the link to your Home Screen:
 
-↑ share, + Add to Home Screen 
+[↑] share, [+] Add to Home Screen 
 or
 Run as Web app
 
