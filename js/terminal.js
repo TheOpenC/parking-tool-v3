@@ -61,6 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
     step();
       }
 
+  // render html after text loads
+  function typeCharThenRenderHTML(targetElement, html, speed, onComplete) {
+    //create text-only version for typinig animation
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    const plain = tmp.textContent || tmp.innerText || '';
+    // Type the plain text
+    targetElement.textContent = '';
+    typeChar(targetElement, plain, speed, () => {
+      // Swap in html so link becomes clickable
+      targetElement.innerHTML = html;
+
+      if (typeof onComplete === 'function') onComplete();
+    });
+  }
 
 
   // By Line animation effect 
@@ -144,7 +160,10 @@ DREWD (2025)
 const gitHub = `<a href="https://github.com/TheOpenC/parking-tool-v3">GitHub</a>`
 
 const projectDescription = `
-ASipP is a resource designed and maintained by Drew Dudak to help navigate future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, a two-week summary, and upcoming suspensions. ASipP updates its report every hour, 24 hours a day to account for changes in weather and current events. The report gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. 
+ASipP is a resource designed and maintained by Drew Dudak to help navigate future NYC Alternate Side Parking suspensions. The report provides current ASP status, tomorrow's status, a two-week summary, and upcoming suspensions. ASipP updates its report every hour, 24 hours a day to account for changes in weather and current events. The report gets its information from the official NYC 311 Public API. It does not account for film + residential permits, street construction, or scheduled events. To see more projects or get in touch,
+<a href="https://primary-materials.io" target="_blank" rel="noopener noreferrer">
+primary-materials.io
+</a>
 `;
 
 const fetchingReport = `
@@ -190,7 +209,7 @@ function fetchAndShowReport() {
           
               setTimeout(() => {
                 // type the description at the bottom
-                typeChar(projectDiv, projectDescription, 1);
+                typeCharThenRenderHTML(projectDiv, projectDescription, 1);
               }, 2000)
 
             }, 1500)
@@ -204,46 +223,7 @@ function fetchAndShowReport() {
   });
    
 
-  // // initial add event listener
-//})
-
-
-
-  // functions running OLD VERSION
-  // typeLines(headerDiv, headerArt, 20, 40, () => {
-  //   // after art finishes
-  //   setTimeout(() => {
-  //     typeLines(headerDiv, headerTitle, 4, 125, () => {
-  //       // after title finishes
-  //       setTimeout(() => {
-  //         typeChar(projectDiv, projectDescription, 1, () => {
-  //           setTimeout(() => {
-  //             typeChar(loadingAnimation, fetchingReport, 15, () => {
-  //               function typeDot(count) {
-  //                 if (count === 0) return; // stop after N dots
-
-  //                 // add one dot slowly
-  //                 typeChar(loadingAnimation, '.', 500, () => {
-  //                   // when that dot is done, call typeDot again with one less
-  //                   typeDot(count - 1);
-  //                 });
-  //                 fetchAndShowReport();
-  //               }
-
-  //               typeDot(5);
-  //             });
-  //           }, 500);
-  //         })
-  //         // this runs after the intro paragraph finishes typing
-  //         // Fetching report ...
-  //       }, 300)
-  //     });
-  //   }, 300)
-    
-  // })
-
-
-
+  
 
 
 
