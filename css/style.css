@@ -29,7 +29,9 @@ h1, h2, h3, p, pre {
 #terminal pre { margin-top: 12px; }
 
 
-
+a {
+  text-decoration: none;
+}
 .report-output{
   box-sizing: border-box;
   width: 100%;
