@@ -11,6 +11,20 @@
 
       gtag('config', 'G-1C0B80R5QT');
     </script>
+    <!-- Capture and share device viewport details -->
+    <script>
+        function sendViewportData() {
+            if (typeof gtag === "function") {
+            gtag('event', 'viewport_data', {
+                viewport_width: window.innerWidth,
+                viewport_height: window.innerHeight
+            });
+            }
+        }
+
+        // Send on initial load
+        window.addEventListener('load', sendViewportData);
+    </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
