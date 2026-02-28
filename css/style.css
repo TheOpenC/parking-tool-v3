@@ -86,6 +86,12 @@ a {
   }
   
 } 
+@media(max-width: 450px){
+  #headerDiv{
+    font-size: 14px;
+    line-height: 15px;
+  }
+}
 
 /*  Span colors + styling  */
 
