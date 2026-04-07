@@ -203,7 +203,7 @@ function fetchAndShowReport() {
             function typeDot(count) {
               if (count === 0) return;
 
-              typeChar(loadingAnimation, '.', 500, () => {
+              typeChar(loadingAnimation, '.', 150, () => {
                 typeDot(count - 1);
               });  
             }
