@@ -220,11 +220,11 @@ function fetchAndShowReport() {
                 typeCharThenRenderHTML(projectDiv, projectDescription, 1);
               }, 2000)
 
-            }, 1500)
+            }, 500)
           })
-        }, 500)
+        }, 200)
       })  
-    }, 300)
+    }, 200)
   })
 
    
