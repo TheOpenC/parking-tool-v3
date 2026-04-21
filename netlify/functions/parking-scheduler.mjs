@@ -77,7 +77,7 @@ async function getParking() {
 }
 
 async function getWeather() {
-    const   weatherUrl = 'https://api.weather.gov/gridpoints/OKX/35,34/forecast',
+    const   weatherUrl = 'https://api.weather.gov/gridpoints/OKX/33,42/forecast',
             WEATHER_USER_AGENT = 'parking-tool-v3 (contact: ddudak@gmail.com)';
 
     const   weatherRequest = new Request(weatherUrl, {

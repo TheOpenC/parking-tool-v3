@@ -18,7 +18,7 @@ export default async function handler(req, context) {
         headers: { "Content-Type": "text/html; charset=utf-8" },
     });
 } catch (err) {
-    console.err("Error in report function:", err);
+    console.err("Error in report function:", error);
 
     return new Response('Error loading report', {
         status: 500,
